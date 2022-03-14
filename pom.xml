@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>1.3.14</dropwizard.version>
+        <dropwizard.version>2.0.28</dropwizard.version>
         <mainClass>com.flipkart.logisticsadaptor.LogisticsAdaptorApplication</mainClass>
     </properties>
 
@@ -49,7 +49,6 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
-            <version>1.3.14</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -61,11 +60,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>5.2.18.Final</version>
         </dependency>
     </dependencies>
 
