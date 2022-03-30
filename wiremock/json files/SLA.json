@@ -1,0 +1,27 @@
+{
+    "request" : {
+      "urlPath" : "/SLA",
+      "method" : "POST",
+      "headers" : {
+        "Accept" : {
+          "contains" : "json"
+        }
+      },
+      "bodyPatterns" : [ {
+        "equalToJson" : "{\n    \"request_id\": \"${json-unit.ignore}\",\n    \"dispatch_date\": \"${json-unit.ignore}\",\n    \"customer_pincode\": \"560034\",\n    \"seller_pincode\": \"400045\",\n    \"rto_pincode\": \"600032\",\n    \"length\": \"${json-unit.ignore}\",\n    \"breadth\": \"${json-unit.ignore}\",\n    \"height\": \"${json-unit.ignore}\",\n    \"weight\": \"${json-unit.ignore}\",\n    \"delivery_type\": \"Small\",\n    \"service_type\": \"${json-unit.ignore}\",\n    \"is_dangerous\": true,\n    \"is_fragile\": false\n}\n",
+        "ignoreArrayOrder" : false
+      }, {
+        "matchesJsonPath" : {
+          "expression" : "service_type",
+          "equalTo" : "FORWARD"
+        }
+      } ]
+      },
+    "response" : {
+      "status" : 201,
+      "body" : "{\n  \"request_id\": \"82b317b3-8c7c-4fdd-ac78-6726f6e67f3b\",\n  \"serviceable\": true,\n  \"lane\": \"METRO\",\n  \"allowed_goods_category\": \"Essentials\",\n  \"prexo\": true,\n  \"prepaid_limit\": 1000000,\n  \"cod_limit\": 49999,\n  \"connections\": {\n    \"REGULAR\": {\n      \"serviceable\": true,\n      \"SLA\": \"3 days\",\n      \"packaging_requirement\": \"Any\"\n    },\n    \"ECONOMY\": {\n      \"serviceable\": true,\n      \"SLA\": \"5 days\",\n      \"packaging_requirement\": \"NonPlastic\"\n    }\n  },\n  \"rvp\": true,\n  \"cod\": true\n}\n",
+      "headers" : {
+        "Content-Type" : "application/json"
+      }
+    }
+}
