@@ -28,4 +28,10 @@ public class LogisticsAdaptorResource {
         return res.getValue();
     }
 
+    @GET
+    @Timed
+    @UnitOfWork
+    public String get(){
+        return "OK";
+    }
 }
