@@ -1,4 +1,4 @@
-package com.flipkart.logisticsadaptor.models;
+package com.flipkart.logisticsadaptor.models.csv;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.Getter;

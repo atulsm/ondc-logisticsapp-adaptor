@@ -1,11 +1,7 @@
 package com.flipkart.logisticsadaptor.utils;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.flipkart.logisticsadaptor.models.PincodeCsvModel;
-import com.opencsv.bean.CsvBindByName;
+import com.flipkart.logisticsadaptor.models.csv.PincodeCsvModel;
 import junit.framework.TestCase;
-import lombok.*;
 import org.junit.Assert;
 import org.junit.Test;
 
