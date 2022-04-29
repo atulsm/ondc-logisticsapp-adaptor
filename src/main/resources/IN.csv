@@ -1,23 +1,23 @@
 key,place_name,admin_name1,latitude,longitude,accuracy
 IN/110001,Connaught Place,New Delhi,28.6333,77.2167,4
-IN/110002,Darya Ganj,New Delhi,28.6333,77.25,4
-IN/110003,Aliganj,New Delhi,28.65,77.2167,
-IN/110004,Rashtrapati Bhawan,New Delhi,28.65,77.2167,
-IN/110005,Lower Camp Anand Parbat,New Delhi,28.65,77.2,
-IN/110006,Bara Tooti,New Delhi,28.65,77.2167,
-IN/110007,Birla Lines,New Delhi,28.6833,77.2,
-IN/110008,Patel Nagar,New Delhi,28.65,77.2167,
-IN/110010,Delhi Cantt,New Delhi,28.55,77.2667,
-IN/110011,Nirman Bhawan,New Delhi,28.55,77.2667,
-IN/110012,Inderpuri,New Delhi,28.55,77.2667,
-IN/110013,Hazrat Nizamuddin,New Delhi,28.55,77.2667,
-IN/110014,Jangpura,New Delhi,28.55,77.2667,
+IN/110002,Darya Ganj,New Delhi,28.6333,77.25,2
+IN/110003,Aliganj,New Delhi,28.65,77.2167,4
+IN/110004,Rashtrapati Bhawan,New Delhi,28.65,77.2167,4
+IN/110005,Lower Camp Anand Parbat,New Delhi,28.65,77.2,1
+IN/110006,Bara Tooti,New Delhi,28.65,77.2167,4
+IN/110007,Birla Lines,New Delhi,28.6833,77.2,1
+IN/110008,Patel Nagar,New Delhi,28.65,77.2167,4
+IN/110010,Delhi Cantt,New Delhi,28.55,77.2667,4
+IN/110011,Nirman Bhawan,New Delhi,28.55,77.2667,4
+IN/110012,Inderpuri,New Delhi,28.55,77.2667,4
+IN/110013,Hazrat Nizamuddin,New Delhi,28.55,77.2667,4
+IN/110014,Jangpura,New Delhi,28.55,77.2667,4
 IN/110015,Zakhira,New Delhi,28.55,77.2667,
-IN/110016,Hauz Khas,New Delhi,28.55,77.2667,
-IN/110017,Malviya Nagar,New Delhi,28.55,77.2667,
-IN/110018,Vishnu Garden,New Delhi,28.55,77.2667,
-IN/110019,Nehru Place,New Delhi,28.55,77.2667,
-IN/110020,Flatted Factories Complex,New Delhi,28.6488,77.1726,
+IN/110016,Hauz Khas,New Delhi,28.55,77.2667,4
+IN/110017,Malviya Nagar,New Delhi,28.55,77.2667,4
+IN/110018,Vishnu Garden,New Delhi,28.55,77.2667,4
+IN/110019,Nehru Place,New Delhi,28.55,77.2667,4
+IN/110020,Flatted Factories Complex,New Delhi,28.6488,77.1726,4
 IN/110021,Malcha Marg,New Delhi,28.6488,77.1726,
 IN/110022,Postal Saving Bureau,New Delhi,28.6488,77.1726,
 IN/110023,Kidwai Nagar,New Delhi,28.6488,77.1726,

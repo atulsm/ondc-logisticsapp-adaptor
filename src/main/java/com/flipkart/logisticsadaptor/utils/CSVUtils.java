@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class CSVUtils {
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(inputReader)
                     .withType(type)
                     .withIgnoreLeadingWhiteSpace(true)
+                    .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
                     .build();
             return csvToBean.parse();
         } catch (Exception e) {
