@@ -1,9 +1,14 @@
 package com.flipkart.logisticsadaptor.engine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
+import com.flipkart.logisticsadaptor.commons.clients.BasicHttpClient;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ekart.SLAResponse;
+import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
+import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.sun.jersey.api.client.WebResource;
+import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.client.ClientResponse;
 
 import javax.inject.Inject;
@@ -13,31 +18,26 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
 @Singleton
+@Slf4j
 public class EkartAdaptorEngine {
 
-    @Inject
-    ObjectMapper mapper ;
+
+    BaseClient<SearchRequest, ResponseMessage> searchRequestResponseMessageBaseClient;
+
+    EkartAdaptorEngine(){
+        searchRequestResponseMessageBaseClient = new BasicHttpClient<SearchRequest, SLAResponse, ResponseMessage>();
+    }
 
 
-    public SLAResponse getSLAResponse(SLARequest slaRequest){
-        Client client = ClientBuilder.newClient();
 
-        WebTarget webTarget = client
-                .target("http://localhost:8080/RESTfulExample/rest/json/metallica/get").path("");
-
-        ClientResponse response = webTarget.request().buildPost(SLARequest.class)
-
-        if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
+    public ResponseMessage getSearchResponse(SearchRequest searchRequest){
+        try {
+            return searchRequestResponseMessageBaseClient.execute(searchRequest);
         }
-
-        SLAResponse output =  mapper.readValue(response.getEntity(), SLAResponse.class);
-        System.out.println("Output from Server .... \n");
-        System.out.println(output);
-        return output;
-
-
+        catch (Exception e){
+            log.error("Exception In getSearchResponse : " + e.getMessage());
+        }
+       return null;
     }
 
 

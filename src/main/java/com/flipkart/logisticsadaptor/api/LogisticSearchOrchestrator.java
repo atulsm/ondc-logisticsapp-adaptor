@@ -24,17 +24,6 @@ public class LogisticSearchOrchestrator {
     }
 
     private ResponseMessage getSearchMessage(SearchRequest searchRequest){
-        SLARequest SlaRequest = getSLARequestForSearchContext(searchRequest.getMessage());
-        SLAResponse slaResponse = ekartAdaptorEngine.getSLAResponse(SlaRequest);
-
-
-
-
-
-        return null;
-
-
-
-
+        return ekartAdaptorEngine.getSearchResponse(searchRequest);
     }
 }
