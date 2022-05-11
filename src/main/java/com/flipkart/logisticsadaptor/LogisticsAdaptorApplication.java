@@ -10,6 +10,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import lombok.extern.slf4j.Slf4j;
 
 public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorConfiguration> {
 
@@ -37,10 +38,11 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
     @Override
     public void run(final LogisticsAdaptorConfiguration configuration,
                     final Environment environment) {
-        final BucketDao dao = new BucketDao(hibernate.getSessionFactory());
-        LogisticsAdaptorService.INSTANCE.init(dao);
+        //final BucketDao dao = new BucketDao(hibernate.getSessionFactory());
+        LogisticsAdaptorService.INSTANCE.init(null);
         environment.jersey().register(new LogisticsAdaptorResource());
 
     }
+
 
 }

@@ -8,15 +8,17 @@ import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 import java.io.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@Slf4j
 public class CSVUtils {
 
+    private static final Logger log = LoggerFactory.getLogger("default");
     public static <T> List<T> fetchInputRecords(InputStream uploadedInputStream, Class<T> type) throws Exception{
         try {
             Reader inputReader = new InputStreamReader(uploadedInputStream);

@@ -7,10 +7,13 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
+@Singleton
 public class CustomObjectMapper {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 

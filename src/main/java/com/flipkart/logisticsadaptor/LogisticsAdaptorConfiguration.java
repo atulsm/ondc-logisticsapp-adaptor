@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor;
 
+import com.flipkart.logisticsadaptor.engine.EkartConfig;
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.db.DataSourceFactory;
@@ -17,4 +18,9 @@ public class LogisticsAdaptorConfiguration extends Configuration {
     public DataSourceFactory getDataSourceFactory() {
         return database;
     }
+
+    @Valid
+    @NotNull
+    @JsonProperty("ekart")
+    private EkartConfig ekartConfig;
 }

@@ -9,6 +9,6 @@ import javax.inject.Singleton;
 @Setter
 @Singleton
 public class EkartConfig {
-    String eKartHost;
-    int port;
+    private String eKartHost;
+    private int port;
 }

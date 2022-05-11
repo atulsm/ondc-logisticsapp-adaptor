@@ -1,10 +1,4 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package com.flipkart.logisticsadaptor.models.ondc.common;
-
-import com.nsdl.beckn.api.enums.ErrorType;
 
 public class Error
 {

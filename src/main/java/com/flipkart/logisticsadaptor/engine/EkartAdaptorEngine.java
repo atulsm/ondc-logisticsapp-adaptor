@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.client.ClientResponse;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,12 +23,10 @@ import javax.ws.rs.client.WebTarget;
 public class EkartAdaptorEngine {
 
 
+
+    @Inject
+    @Named("EKartSearchClient")
     BaseClient<SearchRequest, ResponseMessage> searchRequestResponseMessageBaseClient;
-
-    EkartAdaptorEngine(){
-        searchRequestResponseMessageBaseClient = new BasicHttpClient<SearchRequest, SLAResponse, ResponseMessage>();
-    }
-
 
 
     public ResponseMessage getSearchResponse(SearchRequest searchRequest){
