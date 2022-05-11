@@ -19,7 +19,7 @@ database:
     hibernate.format_sql: false
     hibernate.hbm2ddl.auto: update
 ekart:
-  host: localhost
+  ekartHost: localhost
   port: 1234
 logging:
   level: INFO

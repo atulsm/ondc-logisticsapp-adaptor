@@ -38,8 +38,8 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
     @Override
     public void run(final LogisticsAdaptorConfiguration configuration,
                     final Environment environment) {
-        //final BucketDao dao = new BucketDao(hibernate.getSessionFactory());
-        LogisticsAdaptorService.INSTANCE.init(null);
+        final BucketDao dao = new BucketDao(hibernate.getSessionFactory());
+        LogisticsAdaptorService.INSTANCE.init(dao);
         environment.jersey().register(new LogisticsAdaptorResource());
 
     }
