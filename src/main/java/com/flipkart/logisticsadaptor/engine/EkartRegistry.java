@@ -13,6 +13,7 @@ import com.google.inject.Provides;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -30,6 +31,7 @@ public class EkartRegistry {
         );
     }
 
+    @Inject
     @Named("EKartSearchHttpClient")
     CoreHttpClient<SLAResponse>  provideEkartSearchHttpClient(EkartConfig ekartConfig){
         return new CoreHttpClient<>(ekartConfig.getEKartHost(),
