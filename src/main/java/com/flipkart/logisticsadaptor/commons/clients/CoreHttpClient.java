@@ -43,7 +43,7 @@ import java.util.Map;
 @Setter
 @Slf4j
 public class CoreHttpClient<T> {
-    private static final String SCHEME = "http";
+    private static final String SCHEME = "https";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
     private static final String UTF8 = "UTF-8";
 

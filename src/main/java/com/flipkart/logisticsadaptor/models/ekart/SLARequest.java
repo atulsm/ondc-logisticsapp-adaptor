@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.models.ekart;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,9 @@ public class SLARequest {
     private float weight;
     private String delivery_type;
     private String service_type;
+    @JsonProperty(value="is_dangerous")
     private boolean is_dangerous;
+    @JsonProperty(value="is_fragile")
     private boolean is_fragile;
 
 }
