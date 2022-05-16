@@ -17,11 +17,13 @@ import ch.qos.logback.classic.Logger;
 public class CSVUtils {
 	private static Logger log;
     static {
-    	Logger log = (Logger)LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
+    	log = (Logger)LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
     	log.setLevel(Level.INFO);
     }
     
     public static <T> List<T> fetchInputRecords(InputStream uploadedInputStream, Class<T> type) throws Exception{
+    	Level current = log.getLevel();
+    	log.setLevel(Level.INFO);
         try {
             Reader inputReader = new InputStreamReader(uploadedInputStream);
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(inputReader)
@@ -33,6 +35,8 @@ public class CSVUtils {
         } catch (Exception e) {
         	log.error("Exception while converting the csv record :{} ", e);
             throw e;
+        }finally {
+    	 log.setLevel(current);
         }
     }
 
