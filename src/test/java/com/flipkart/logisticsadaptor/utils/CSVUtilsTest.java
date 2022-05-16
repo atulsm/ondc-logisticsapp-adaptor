@@ -17,7 +17,7 @@ public class CSVUtilsTest extends TestCase {
     @Test
     public static void testCsv() throws Exception{
         List<PincodeCsvModel> pincodeList =  CSVUtils.fetchInputRecords(new FileInputStream(new File(path)), PincodeCsvModel.class);
-        Assert.assertNotNull(pincodeList.get(0).getKey());
+        Assert.assertNotNull(pincodeList.get(0).getPincode());
         Assert.assertNotNull(pincodeList.get(0).getLatitude());
         Assert.assertNotNull(pincodeList.get(0).getLongitude());
     }
