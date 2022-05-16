@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 public class PincodeCsvModel {
         @CsvBindByName(column = "key")
-        private String key ;
+        private String pincode ;
         @CsvBindByName(column = "place_name")
         private String place_name;
         @CsvBindByName(column = "admin_name1")
@@ -21,4 +21,4 @@ public class PincodeCsvModel {
         private Double longitude;
         @CsvBindByName(column = "accuracy", required = false)
         private int accuracy;
-};
+}

@@ -1,0 +1,14 @@
+{
+  "request" : {
+    "urlPath" : "/test",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 201,
+    "body" : "{{{request.body}}}",
+    "headers" : {
+      "Content-Type" : "application/json"
+    },
+    "transformers": ["response-template"]
+  }
+}

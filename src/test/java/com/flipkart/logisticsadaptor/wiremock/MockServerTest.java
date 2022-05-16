@@ -10,6 +10,6 @@ public class MockServerTest extends TestCase {
 
     @Test
     public static void testMockServer() throws InterruptedException {
-
+        Thread.sleep(50000);
     }
 }
