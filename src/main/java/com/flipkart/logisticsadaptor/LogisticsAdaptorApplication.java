@@ -3,6 +3,7 @@ package com.flipkart.logisticsadaptor;
 import com.flipkart.logisticsadaptor.api.LogisticsAdaptorService;
 import com.flipkart.logisticsadaptor.core.Bucket;
 import com.flipkart.logisticsadaptor.db.BucketDao;
+import com.flipkart.logisticsadaptor.resources.LogisticSearchResource;
 import com.flipkart.logisticsadaptor.resources.LogisticsAdaptorResource;
 
 import io.dropwizard.Application;
@@ -10,6 +11,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import lombok.extern.slf4j.Slf4j;
 
 public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorConfiguration> {
 
@@ -40,7 +42,9 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
         final BucketDao dao = new BucketDao(hibernate.getSessionFactory());
         LogisticsAdaptorService.INSTANCE.init(dao);
         environment.jersey().register(new LogisticsAdaptorResource());
+        environment.jersey().register(new LogisticSearchResource());
 
     }
+
 
 }

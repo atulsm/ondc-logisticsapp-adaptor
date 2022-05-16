@@ -3,9 +3,6 @@ package com.atul.configservice.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flipkart.logisticsadaptor.core.Bucket;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import io.dropwizard.jackson.Jackson;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,6 +12,7 @@ public class IntegrationTestBucketService {
     private static final ObjectMapper MAPPER = Jackson.newObjectMapper();
 
     public void testBucketResource(int attempts, boolean showOutput) {
+        /*
         try {
             Client client = Client.create();
             for(int i=0;i<attempts;i++) {
@@ -34,6 +32,8 @@ public class IntegrationTestBucketService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     @Test
