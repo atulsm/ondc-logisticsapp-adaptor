@@ -4,6 +4,9 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import lombok.Builder;
+
+@Builder
 public class Intent
 {
     private Provider provider;

@@ -17,11 +17,18 @@ public class LocalReverseGeocodeService implements ReverseGeocodeService{
     private static final String CSV_PATH = "src/main/resources/IN.csv";
     private HashMap<String, Integer> pincodeCsvModelHashMap = new HashMap<>();
 
-    LocalReverseGeocodeService() throws Exception {
-        List<PincodeCsvModel> pincodeList =  CSVUtils.fetchInputRecords(new FileInputStream(new File(CSV_PATH)), PincodeCsvModel.class);
-        pincodeList.stream().forEach(entry -> {
+    public LocalReverseGeocodeService()  {
+        try {
+            List<PincodeCsvModel> pincodeList =  CSVUtils.fetchInputRecords(new FileInputStream(new File(CSV_PATH)), PincodeCsvModel.class);
+            pincodeList.stream().forEach(entry -> {
 
-        });
+
+            });
+        }
+        catch (Exception e){
+
+        }
+
 
     }
 

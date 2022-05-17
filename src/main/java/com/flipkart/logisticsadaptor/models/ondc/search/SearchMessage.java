@@ -2,7 +2,9 @@ package com.flipkart.logisticsadaptor.models.ondc.search;
 
 
 import com.flipkart.logisticsadaptor.models.ondc.common.Intent;
+import lombok.Builder;
 
+@Builder
 public class SearchMessage
 {
     private Intent intent;

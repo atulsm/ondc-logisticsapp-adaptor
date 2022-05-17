@@ -1,7 +1,9 @@
 package com.flipkart.logisticsadaptor.models.ondc.search;
 
 import com.flipkart.logisticsadaptor.models.ondc.common.Context;
+import lombok.Builder;
 
+@Builder
 public class SearchRequest
 {
     private Context context;
