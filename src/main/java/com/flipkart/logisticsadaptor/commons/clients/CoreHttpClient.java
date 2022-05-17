@@ -114,7 +114,8 @@ public class CoreHttpClient<T> {
         }
         httpPost.setEntity(new StringEntity(
                     CustomObjectMapper.getObjectAsString(request.getBody()),
-                    UTF8
+                    "application/json",
+                UTF8
             ));
         return httpPost;
     }
@@ -125,7 +126,6 @@ public class CoreHttpClient<T> {
         // Create Url
         URIBuilder uriBuilder = new URIBuilder()
                 .setScheme(SCHEME)
-                .setPort(port)
                 .setHost(host)
                 .setPath(request.getUrl());
         // Add url params

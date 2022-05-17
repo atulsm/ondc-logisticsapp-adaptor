@@ -1,8 +1,6 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
-import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
-import com.flipkart.logisticsadaptor.models.ekart.SLAResponse;
 import com.flipkart.logisticsadaptor.models.ondc.response.Response;
 import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
