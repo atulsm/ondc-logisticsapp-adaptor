@@ -19,8 +19,7 @@ public class SearchRequestTransformer  implements RequestTransformer<SearchReque
 
     private static final String SERVICEABILITY_URL = "/v1/offerings";
 
-    public SearchRequestTransformer(){
-    }
+
 
     @Override
     public ClientRequest getClientRequest(SearchRequest request) {

@@ -5,6 +5,7 @@ import com.flipkart.logisticsadaptor.commons.clients.BasicHttpClient;
 import com.flipkart.logisticsadaptor.commons.clients.CoreHttpClient;
 import com.flipkart.logisticsadaptor.commons.utils.CustomObjectMapper;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.SearchRequestTransformer;
@@ -22,7 +23,7 @@ public class EkartRegistry {
     @Provides
     @Singleton
     @Named("EKartSearchClient")
-    BaseClient<SearchRequest, ResponseMessage> provideEkartSearchClient(@Named("EKartSearchHttpClient") CoreHttpClient<CheckServiceabilityResponse> httpClient){
+    BaseClient<SearchRequest, OnSearchMessage> provideEkartSearchClient(@Named("EKartSearchHttpClient") CoreHttpClient<CheckServiceabilityResponse> httpClient){
         return new BasicHttpClient<>(
                 httpClient,
                 new SearchRequestTransformer(),
@@ -30,7 +31,9 @@ public class EkartRegistry {
         );
     }
 
+    @Provides
     @Inject
+    @Singleton
     @Named("EKartSearchHttpClient")
     CoreHttpClient<CheckServiceabilityResponse>  provideEkartSearchHttpClient(EkartConfig ekartConfig){
         return new CoreHttpClient<>(ekartConfig.getEKartHost(),

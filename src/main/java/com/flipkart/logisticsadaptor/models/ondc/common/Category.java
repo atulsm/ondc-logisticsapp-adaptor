@@ -4,8 +4,11 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import lombok.Builder;
+
 import java.util.List;
 
+@Builder
 public class Category
 {
     private String id;

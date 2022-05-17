@@ -31,9 +31,6 @@ public class CoreHttpClientTest extends TestCase {
 
         CoreHttpResponse<CheckServiceabilityResponse> response = coreHttpClient.execute(clientRequest);
         CheckServiceabilityResponse slaResponse = response.getEntity();
-        System.out.println(slaResponse);
-
-
 
 
     }

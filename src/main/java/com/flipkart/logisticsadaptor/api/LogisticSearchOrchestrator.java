@@ -1,6 +1,8 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.response.Response;
 import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
@@ -14,14 +16,14 @@ public class LogisticSearchOrchestrator {
     @Inject
     EkartAdaptorEngine ekartAdaptorEngine;
 
-    public Response orchestrate(SearchRequest searchRequest){
-        Response response = new Response();
-        response.setContext(searchRequest.getContext());
-        response.setMessage(getSearchMessage(searchRequest));
-        return response;
+    public OnSearchRequest orchestrate(SearchRequest searchRequest){
+        OnSearchRequest onSearchRequest = new OnSearchRequest();
+        onSearchRequest.setContext(searchRequest.getContext());
+        onSearchRequest.setMessage(getSearchMessage(searchRequest));
+        return onSearchRequest;
     }
 
-    private ResponseMessage getSearchMessage(SearchRequest searchRequest){
+    private OnSearchMessage getSearchMessage(SearchRequest searchRequest){
         return ekartAdaptorEngine.getSearchResponse(searchRequest);
     }
 }

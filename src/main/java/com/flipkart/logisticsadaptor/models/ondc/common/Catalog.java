@@ -1,13 +1,11 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
 import java.util.List;
 
+@Builder
 public class Catalog
 {
     @JsonProperty("bpp/descriptor")

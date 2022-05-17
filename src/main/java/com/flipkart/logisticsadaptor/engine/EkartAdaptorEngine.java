@@ -1,6 +1,8 @@
 package com.flipkart.logisticsadaptor.engine;
 
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +19,10 @@ public class EkartAdaptorEngine {
 
     @Inject
     @Named("EKartSearchClient")
-    BaseClient<SearchRequest, ResponseMessage> searchRequestResponseMessageBaseClient;
+    BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient;
 
 
-    public ResponseMessage getSearchResponse(SearchRequest searchRequest){
+    public OnSearchMessage getSearchResponse(SearchRequest searchRequest){
         try {
             return searchRequestResponseMessageBaseClient.execute(searchRequest);
         }
