@@ -2,6 +2,7 @@ package com.flipkart.logisticsadaptor.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.flipkart.logisticsadaptor.api.LogisticSearchOrchestrator;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.response.Response;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -22,7 +23,7 @@ public class LogisticSearchResource {
     @Timed
     @UnitOfWork
     @Path("/v1")
-    public Response searchV1(SearchRequest searchRequest){
+    public OnSearchRequest searchV1(SearchRequest searchRequest){
         return logisticSearchOrchestrator.orchestrate(searchRequest);
     }
 }
