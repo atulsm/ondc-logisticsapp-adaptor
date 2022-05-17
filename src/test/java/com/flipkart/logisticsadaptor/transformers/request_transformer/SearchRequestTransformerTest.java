@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.transformers.request_transformer;
 
+import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.*;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
@@ -18,9 +19,10 @@ public class SearchRequestTransformerTest extends TestCase {
                 .builder()
                 .intent(getIntent())
                 .build();
-        searchRequestTransformer.getClientRequest(SearchRequest.builder()
+        ClientRequest clientRequest = searchRequestTransformer.getClientRequest(SearchRequest.builder()
                 .message(searchMessage)
                 .build());
+        clientRequest.getHeaders();
     }
 
     private Intent getIntent(){
@@ -29,13 +31,13 @@ public class SearchRequestTransformerTest extends TestCase {
                         .start(Start.builder()
                                         .location(Location
                                         .builder()
-                                        .gps("123")
+                                        .gps("26.5500,90.4667")
                                         .build())
                                         .build())
                         .end(End.builder()
                                         .location(Location
                                         .builder()
-                                        .gps("123")
+                                        .gps("26.5500,90.4667")
                                         .build())
                                 .build())
                         .build())
