@@ -1,23 +1,25 @@
-package com.flipkart.logisticsadaptor.models.ondc.search;
 
+package com.flipkart.logisticsadaptor.models.ondc;
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.flipkart.logisticsadaptor.models.ondc.common.Context;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchRequest
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class OnSearchRequest
 {
     private Context context;
-    private SearchMessage message;
+    private OnSearchMessage message;
     
     public Context getContext() {
         return this.context;
     }
     
-    public SearchMessage getMessage() {
+    public OnSearchMessage getMessage() {
         return this.message;
     }
     
@@ -25,7 +27,7 @@ public class SearchRequest
         this.context = context;
     }
     
-    public void setMessage(final SearchMessage message) {
+    public void setMessage(final OnSearchMessage message) {
         this.message = message;
     }
     
@@ -34,10 +36,10 @@ public class SearchRequest
         if (o == this) {
             return true;
         }
-        if (!(o instanceof SearchRequest)) {
+        if (!(o instanceof OnSearchRequest)) {
             return false;
         }
-        final SearchRequest other = (SearchRequest)o;
+        final OnSearchRequest other = (OnSearchRequest)o;
         if (!other.canEqual(this)) {
             return false;
         }
@@ -68,7 +70,7 @@ public class SearchRequest
     }
     
     protected boolean canEqual(final Object other) {
-        return other instanceof SearchRequest;
+        return other instanceof OnSearchRequest;
     }
     
     @Override
@@ -84,6 +86,6 @@ public class SearchRequest
     
     @Override
     public String toString() {
-        return "SearchRequest(context=" + this.getContext() + ", message=" + this.getMessage() + ")";
+        return "OnSearchRequest(context=" + this.getContext() + ", message=" + this.getMessage() + ")";
     }
 }

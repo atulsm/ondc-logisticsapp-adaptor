@@ -43,7 +43,7 @@ import java.util.Map;
 @Setter
 @Slf4j
 public class CoreHttpClient<T> {
-    private static final String SCHEME = "http";
+    private static final String SCHEME = "https";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
     private static final String UTF8 = "UTF-8";
 
@@ -114,7 +114,8 @@ public class CoreHttpClient<T> {
         }
         httpPost.setEntity(new StringEntity(
                     CustomObjectMapper.getObjectAsString(request.getBody()),
-                    UTF8
+                    "application/json",
+                UTF8
             ));
         return httpPost;
     }
@@ -125,7 +126,6 @@ public class CoreHttpClient<T> {
         // Create Url
         URIBuilder uriBuilder = new URIBuilder()
                 .setScheme(SCHEME)
-                .setPort(port)
                 .setHost(host)
                 .setPath(request.getUrl());
         // Add url params

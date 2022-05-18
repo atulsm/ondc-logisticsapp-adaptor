@@ -1,29 +1,32 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
-import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
-import com.flipkart.logisticsadaptor.models.ekart.SLAResponse;
-import com.flipkart.logisticsadaptor.models.ondc.response.Response;
-import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.google.inject.Inject;
 
-import javax.inject.Inject;
 
-import static com.flipkart.logisticsadaptor.utils.EkartUtils.getSLARequestForSearchContext;
+public class LogisticSearchOrchestrator  {
 
-public class LogisticSearchOrchestrator {
 
+    private EkartAdaptorEngine ekartAdaptorEngine ;
     @Inject
-    EkartAdaptorEngine ekartAdaptorEngine;
-
-    public Response orchestrate(SearchRequest searchRequest){
-        Response response = new Response();
-        response.setContext(searchRequest.getContext());
-        response.setMessage(getSearchMessage(searchRequest));
-        return response;
+    public LogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
+        this.ekartAdaptorEngine = ekartAdaptorEngine;
     }
 
-    private ResponseMessage getSearchMessage(SearchRequest searchRequest){
+
+
+    public OnSearchRequest orchestrate(SearchRequest searchRequest){
+        OnSearchRequest onSearchRequest = new OnSearchRequest();
+        onSearchRequest.setContext(searchRequest.getContext());
+        onSearchRequest.setMessage(getSearchMessage(searchRequest));
+        return onSearchRequest;
+    }
+
+    private OnSearchMessage getSearchMessage(SearchRequest searchRequest){
         return ekartAdaptorEngine.getSearchResponse(searchRequest);
     }
+
 }

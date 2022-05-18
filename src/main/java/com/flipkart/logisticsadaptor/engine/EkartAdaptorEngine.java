@@ -1,13 +1,13 @@
 package com.flipkart.logisticsadaptor.engine;
 
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
-import com.flipkart.logisticsadaptor.models.ondc.response.ResponseMessage;
+import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 @Singleton
 @Slf4j
@@ -15,12 +15,14 @@ public class EkartAdaptorEngine {
 
 
 
+    private BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient;
     @Inject
-    @Named("EKartSearchClient")
-    BaseClient<SearchRequest, ResponseMessage> searchRequestResponseMessageBaseClient;
+    public EkartAdaptorEngine(@Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
+        this.searchRequestResponseMessageBaseClient = searchRequestResponseMessageBaseClient;
+    }
 
 
-    public ResponseMessage getSearchResponse(SearchRequest searchRequest){
+    public OnSearchMessage getSearchResponse(SearchRequest searchRequest){
         try {
             return searchRequestResponseMessageBaseClient.execute(searchRequest);
         }

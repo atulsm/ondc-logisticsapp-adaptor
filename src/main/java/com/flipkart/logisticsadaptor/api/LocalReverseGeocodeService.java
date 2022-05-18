@@ -17,12 +17,22 @@ public class LocalReverseGeocodeService implements ReverseGeocodeService{
     private static final String CSV_PATH = "src/main/resources/IN.csv";
     private HashMap<String, Integer> pincodeCsvModelHashMap = new HashMap<>();
 
-    LocalReverseGeocodeService() throws Exception {
-        List<PincodeCsvModel> pincodeList =  CSVUtils.fetchInputRecords(new FileInputStream(new File(CSV_PATH)), PincodeCsvModel.class);
-        pincodeList.stream().forEach(entry -> {
+    public LocalReverseGeocodeService()  {
+        try {
+            List<PincodeCsvModel> pincodeList =  CSVUtils.fetchInputRecords(new FileInputStream(new File(CSV_PATH)), PincodeCsvModel.class);
+            pincodeList.forEach(entry -> {
+                Geocode geocode = Geocode.builder()
+                        .latitude(entry.getLatitude().toString())
+                        .longitude(entry.getLongitude().toString())
+                        .build();
+                Integer pincode = Integer.parseInt(entry.getPincode().split("/")[1]);
+                pincodeCsvModelHashMap.put(getHashForGeoCode(geocode), pincode);
 
-        });
+            });
+        }
+        catch (Exception e){
 
+        }
     }
 
     @Override
@@ -31,6 +41,6 @@ public class LocalReverseGeocodeService implements ReverseGeocodeService{
     }
 
     private String getHashForGeoCode(Geocode geocode){
-        return "test";
+        return String.format("%.4f",Double.parseDouble(geocode.getLatitude())) + "B" + String.format("%.4f" , Double.parseDouble(geocode.getLongitude()));
     }
 }
