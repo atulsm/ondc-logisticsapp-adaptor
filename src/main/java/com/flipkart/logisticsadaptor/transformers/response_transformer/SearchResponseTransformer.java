@@ -22,7 +22,7 @@ public class SearchResponseTransformer  implements ResponseTransformer<CheckServ
     @Override
     public OnSearchMessage convertResponse(CheckServiceabilityResponse responseTransformerInput) {
         return OnSearchMessage.builder()
-                .catalog(getCatalogForContext(CheckServiceabilityResponse.builder().build()))
+                .catalog(getCatalogForContext(responseTransformerInput))
                 .build();
     }
 

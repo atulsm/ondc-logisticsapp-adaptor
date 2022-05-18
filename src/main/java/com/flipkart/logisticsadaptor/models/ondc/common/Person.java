@@ -4,6 +4,11 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person
 {
     private String name;

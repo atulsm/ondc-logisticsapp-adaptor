@@ -14,7 +14,7 @@ public class EkartUtils {
     public static Map<String, String> getCommonEkartHeaders(){
         Map<String, String> headers = new HashMap<>();
         headers.put(HEADER_HTTP_X_MERCHANT_CODE, "JYN");
-        headers.put(HEADER_AUTHORIZATION, "test");
+        headers.put(HEADER_AUTHORIZATION, "B");
         //headers.put(HEADER_CONTENT_TYPE, "application/json");
         return headers;
     }

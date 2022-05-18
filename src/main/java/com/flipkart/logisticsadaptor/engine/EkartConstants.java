@@ -12,4 +12,6 @@ public class EkartConstants {
     public static final String EXPRESS = "EXPRESS";
     public static final String PREMIUM = "PREMIUM";
 
+    public static final String FORWARD = "FORWARD";
+
 }

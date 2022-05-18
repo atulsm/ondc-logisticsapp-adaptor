@@ -4,13 +4,19 @@ import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.google.inject.Inject;
 
-import javax.inject.Inject;
 
-public class LogisticSearchOrchestrator {
+public class LogisticSearchOrchestrator  {
 
+
+    private EkartAdaptorEngine ekartAdaptorEngine ;
     @Inject
-    EkartAdaptorEngine ekartAdaptorEngine;
+    public LogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
+        this.ekartAdaptorEngine = ekartAdaptorEngine;
+    }
+
+
 
     public OnSearchRequest orchestrate(SearchRequest searchRequest){
         OnSearchRequest onSearchRequest = new OnSearchRequest();
@@ -22,4 +28,5 @@ public class LogisticSearchOrchestrator {
     private OnSearchMessage getSearchMessage(SearchRequest searchRequest){
         return ekartAdaptorEngine.getSearchResponse(searchRequest);
     }
+
 }

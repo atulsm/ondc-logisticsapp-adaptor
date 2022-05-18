@@ -1,6 +1,7 @@
 package com.flipkart.logisticsadaptor.models.ekart;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class CheckServiceabilityResponse {
     private Double prepaidLimit;
     private Double codLimit;
     private String allowedGoodsCategory;
+    @JsonProperty("connections")
     private ConnectionsServiceabilityResponse connections;
 
 }

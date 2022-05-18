@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.transformers.request_transformer;
 
+import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.*;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchMessage;
@@ -11,7 +12,9 @@ import javax.inject.Inject;
 
 public class SearchRequestTransformerTest extends TestCase {
 
-    SearchRequestTransformer searchRequestTransformer = new SearchRequestTransformer();
+    @Inject
+    ReverseGeocodeService reverseGeocodeService;
+    SearchRequestTransformer searchRequestTransformer = new SearchRequestTransformer(reverseGeocodeService);
 
     @Test
     public void test(){

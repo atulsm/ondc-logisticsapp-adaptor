@@ -5,10 +5,12 @@
 package com.flipkart.logisticsadaptor.models.ondc;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.flipkart.logisticsadaptor.models.ondc.common.Catalog;
 import lombok.Builder;
 
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OnSearchMessage
 {
     private Catalog catalog;

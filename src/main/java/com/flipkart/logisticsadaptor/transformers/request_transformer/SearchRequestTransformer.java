@@ -4,6 +4,7 @@ import com.flipkart.logisticsadaptor.api.LocalReverseGeocodeService;
 import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
+import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.models.Geocode;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.Fulfillment;
@@ -14,8 +15,12 @@ import javax.inject.Inject;
 
 public class SearchRequestTransformer  implements RequestTransformer<SearchRequest, ClientRequest> {
 
+
+    ReverseGeocodeService reverseGeocodeService;
     @Inject
-    ReverseGeocodeService reverseGeocodeService = new LocalReverseGeocodeService();
+    public SearchRequestTransformer(ReverseGeocodeService reverseGeocodeService){
+        this.reverseGeocodeService = reverseGeocodeService;
+    }
 
     private static final String SERVICEABILITY_URL = "/v1/offerings";
 
@@ -35,6 +40,7 @@ public class SearchRequestTransformer  implements RequestTransformer<SearchReque
         return SLARequest.builder()
                 .customer_pincode(getPincode(fulfillment.getEnd().getLocation().getGps()))
                 .seller_pincode(getPincode(fulfillment.getStart().getLocation().getGps()))
+                .serviceType(EkartConstants.FORWARD)
                 .build();
     }
 
