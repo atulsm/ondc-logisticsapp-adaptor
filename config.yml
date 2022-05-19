@@ -10,7 +10,7 @@ server:
 database:
   driverClass: com.mysql.cj.jdbc.Driver
   user: root
-  password: root
+  password:
   url: jdbc:mysql://localhost:3306/logisticsadaptor?enabledTLSProtocols=TLSv1.2
   properties:
     hibernate.dialect: org.hibernate.dialect.MySQL57Dialect

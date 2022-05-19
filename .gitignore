@@ -6,6 +6,7 @@
 .project
 .settings/
 dependency-reduced-pom.xml
+ondc-logisctis-adaptor.iml
 
 # Log file
 *.log

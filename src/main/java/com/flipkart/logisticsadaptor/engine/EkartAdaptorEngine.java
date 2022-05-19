@@ -3,6 +3,8 @@ package com.flipkart.logisticsadaptor.engine;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -33,6 +35,21 @@ public class EkartAdaptorEngine {
        return null;
     }
 
+    private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
+    @Inject
+    public EkartAdaptorEngine(@Named("EKartInitClient") BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient){
+        this.initRequestResponseMessageBaseClient = initRequestResponseMessageBaseClient;
+    }
 
+
+    public OnInitMessage getInitResponse(InitRequest initRequest){
+        try {
+            return initRequestResponseMessageBaseClient.execute(initRequest);
+        }
+        catch (Exception e){
+            log.error("Exception In getInitResponse : " + e.getMessage());
+        }
+        return null;
+    }
 
 }

@@ -4,12 +4,22 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
+
 import java.util.List;
 
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Order
 {
     private String id;
     private String state;
+    @JsonProperty("bpp/items")
     private List<Item> items;
     private List<AddOn> addOns;
     private List<Offer> offers;
