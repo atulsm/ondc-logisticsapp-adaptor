@@ -12,6 +12,7 @@ public class PaymentParams
 {
     private String transactionId;
     private String amount;
+    @JsonProperty("mode")
     private String mode;
     private String vpa;
     @JsonProperty("additionalProp1")
@@ -56,7 +57,8 @@ public class PaymentParams
     public void setAmount(final String amount) {
         this.amount = amount;
     }
-    
+
+    @JsonProperty("mode")
     public void setMode(final String mode) {
         this.mode = mode;
     }
