@@ -52,7 +52,7 @@ public class EkartAdaptorEngine {
             temp.getOrder().setItems(initRequest.getMessage().getOrder().getItems());
             temp.getOrder().setBilling(initRequest.getMessage().getOrder().getBilling());
             temp.getOrder().setFulfillment(initRequest.getMessage().getOrder().getFulfillment());
-            temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder()));
+        //    temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder()));
             return temp;
         }
         catch (Exception e){

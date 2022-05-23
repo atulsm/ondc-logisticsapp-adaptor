@@ -41,9 +41,9 @@ public class InitRequestTransformer implements RequestTransformer<InitRequest, C
     private String getPincode(String gps){
         String parts[] = gps.split(",");
         return reverseGeocodeService.getPincodeFromLatLong(Geocode.builder()
-                .latitude(parts[0])
-                .longitude(parts[1])
-                .build())
-                .toString();
+                    .latitude(parts[0])
+                    .longitude(parts[1])
+                    .build())
+                    .toString();
     }
 }
