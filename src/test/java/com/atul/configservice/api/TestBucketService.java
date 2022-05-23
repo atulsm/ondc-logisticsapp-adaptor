@@ -31,7 +31,7 @@ public class TestBucketService extends TestCase {
         final Configuration config = new Configuration();
         config.setProperty(AvailableSettings.URL, "jdbc:mysql://localhost:3306/configservice");
         config.setProperty(AvailableSettings.USER, "root");
-        config.setProperty(AvailableSettings.PASS, "novell@123");
+        config.setProperty(AvailableSettings.PASS, "root");
         config.setProperty(AvailableSettings.DRIVER, "com.mysql.cj.jdbc.Driver");
         config.setProperty(AvailableSettings.HBM2DDL_AUTO, "update");
         // Use the same configuration as in the Hibernate bundle to reduce differences between

@@ -1,19 +1,20 @@
 package com.flipkart.logisticsadaptor.models.ekart;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
+@lombok.ToString
 @Getter
 @Setter
 @Builder
 @Entity
 @Table(name = "rateCard")
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class RateCard {
     @Id
     @Column(name = "id", nullable = false)
@@ -21,7 +22,4 @@ public class RateCard {
     private String rateCardId;
     private double basePrice;
 
-    public RateCard() {
-
-    }
 }
