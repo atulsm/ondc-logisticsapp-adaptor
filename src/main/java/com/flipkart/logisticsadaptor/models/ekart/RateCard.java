@@ -12,19 +12,16 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-@Table(name = "merchant")
+@Table(name = "rateCard")
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
-public class Merchant {
+public class RateCard {
     @Id
     @Column(name = "id", nullable = false)
-    private String merchantId;
-    private String merchantCode;
-    private String authHeader;
-    @OneToOne
-    @JoinColumn(name = "rateCardId" , referencedColumnName = "id")
-    private RateCard rateCardId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String rateCardId;
+    private double basePrice;
 
-    public Merchant() {
+    public RateCard() {
 
     }
 }

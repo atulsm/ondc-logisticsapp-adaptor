@@ -50,3 +50,36 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+# Dump of table rateCard
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rateCard`;
+
+CREATE TABLE  rateCard
+(
+    id        VARCHAR(255) NOT NULL,
+    basePrice DOUBLE       NULL,
+    CONSTRAINT pk_ratecard PRIMARY KEY (id)
+    );
+
+
+
+# Dump of table merchant
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `merchant`;
+
+CREATE TABLE  merchant
+(
+    id           VARCHAR(255) NOT NULL,
+    merchantCode VARCHAR(255) NULL,
+    authHeader   VARCHAR(255) NULL,
+    rateCardId   VARCHAR(255) NULL,
+    CONSTRAINT pk_merchant PRIMARY KEY (id)
+    );
+
+ALTER TABLE merchant
+    ADD CONSTRAINT FK_MERCHANT_ON_RATECARDID FOREIGN KEY (rateCardId) REFERENCES rateCard (id);
+
