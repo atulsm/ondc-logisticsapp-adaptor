@@ -4,6 +4,7 @@ import com.flipkart.logisticsadaptor.LogisticsAdaptorConfiguration;
 import com.flipkart.logisticsadaptor.api.*;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.db.MerchantDao;
+import com.flipkart.logisticsadaptor.db.RateCardDao;
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
 import com.flipkart.logisticsadaptor.engine.EkartConfig;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
@@ -11,9 +12,14 @@ import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.*;
 import com.google.inject.Module;
 import com.google.inject.name.Named;
+import io.dropwizard.hibernate.HibernateBundle;
 import org.hibernate.SessionFactory;
 
 public class ServerModule implements Module {
+    HibernateBundle<LogisticsAdaptorConfiguration> hibernate;
+    public ServerModule(HibernateBundle<LogisticsAdaptorConfiguration> hibernate){
+        this.hibernate = hibernate;
+    }
     @Override
     public void configure(Binder binder) {
 
@@ -67,6 +73,21 @@ public class ServerModule implements Module {
     public MerchantDao provideMerchantDao(SessionFactory sessionFactory){
         return new MerchantDao(sessionFactory);
     }
+
+    @Inject
+    @Provides
+    @Singleton
+    public RateCardDao provideRateCardDao(SessionFactory sessionFactory){
+        return new RateCardDao(sessionFactory);
+    }
+
+    @Inject
+    @Provides
+    @Singleton
+    public SessionFactory provideSessionFactory(){
+        return hibernate.getSessionFactory();
+    }
+
 
 
 
