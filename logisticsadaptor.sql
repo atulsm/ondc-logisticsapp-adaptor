@@ -65,6 +65,17 @@ CREATE TABLE  rateCard
     );
 
 
+INSERT INTO `rateCard` (`id`, `basePrice`)
+VALUES
+    ('1', 23.00),
+    ('2', 24.00),
+    ('3', 25.00),
+    ('4', 26.00)
+    ;
+
+/*!40000 ALTER TABLE `bucket` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 # Dump of table merchant
 # ------------------------------------------------------------
@@ -83,3 +94,9 @@ CREATE TABLE  merchant
 ALTER TABLE merchant
     ADD CONSTRAINT FK_MERCHANT_ON_RATECARDID FOREIGN KEY (rateCardId) REFERENCES rateCard (id);
 
+
+INSERT INTO `merchant` (`id`, `merchantCode` ,`authHeader`, `rateCardId`)
+VALUES
+    ('https://mock_bap.com/', 'JYN', 'TEST', '1'),
+    ('test_id', 'test', 'TEST', '2')
+    ;
