@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.engine;
 
+import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.commons.clients.BasicHttpClient;
@@ -26,10 +27,11 @@ public class EkartRegistryModule extends AbstractModule {
     @Named("EKartSearchClient")
     @Inject
     BaseClient<SearchRequest, OnSearchMessage> provideEkartSearchClient(@Named("EKartSearchHttpClient") CoreHttpClient<CheckServiceabilityResponse> httpClient,
-                                                                        ReverseGeocodeService reverseGeocodeService){
+                                                                        ReverseGeocodeService reverseGeocodeService,
+                                                                        MerchantService merchantService){
         return new BasicHttpClient<>(
                 httpClient,
-                new SearchRequestTransformer(reverseGeocodeService),
+                new SearchRequestTransformer(reverseGeocodeService, merchantService),
                 new SearchResponseTransformer()
         );
     }

@@ -1,9 +1,11 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
+import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.flipkart.logisticsadaptor.transformers.utils.ONDCUtils;
 import com.google.inject.Inject;
 
 
@@ -22,7 +24,7 @@ public class LogisticSearchOrchestrator  {
 
 
 
-    public OnSearchRequest orchestrate(SearchRequest searchRequest){
+    public OnSearchRequest orchestrate(SearchRequest searchRequest) throws Exception{
         OnSearchRequest onSearchRequest = new OnSearchRequest();
         onSearchRequest.setContext(searchRequest.getContext());
         onSearchRequest.setMessage(getSearchMessage(searchRequest));

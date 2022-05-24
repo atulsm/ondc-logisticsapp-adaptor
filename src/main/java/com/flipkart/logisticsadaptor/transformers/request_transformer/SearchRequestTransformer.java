@@ -1,25 +1,30 @@
 package com.flipkart.logisticsadaptor.transformers.request_transformer;
 
 import com.flipkart.logisticsadaptor.api.LocalReverseGeocodeService;
+import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.models.Geocode;
+import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.Fulfillment;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.flipkart.logisticsadaptor.transformers.utils.EkartUtils;
+import com.flipkart.logisticsadaptor.transformers.utils.ONDCUtils;
 
 import javax.inject.Inject;
 
 public class SearchRequestTransformer  implements RequestTransformer<SearchRequest, ClientRequest> {
 
 
-    ReverseGeocodeService reverseGeocodeService;
+    private ReverseGeocodeService reverseGeocodeService;
+    private MerchantService merchantService;
     @Inject
-    public SearchRequestTransformer(ReverseGeocodeService reverseGeocodeService){
+    public SearchRequestTransformer(ReverseGeocodeService reverseGeocodeService, MerchantService merchantService){
         this.reverseGeocodeService = reverseGeocodeService;
+        this.merchantService = merchantService;
     }
 
     private static final String SERVICEABILITY_URL = "/v1/offerings";
@@ -27,10 +32,11 @@ public class SearchRequestTransformer  implements RequestTransformer<SearchReque
 
 
     @Override
-    public ClientRequest getClientRequest(SearchRequest request) {
+    public ClientRequest getClientRequest(SearchRequest request){
         Fulfillment fulfillment = request.getMessage().getIntent().getFulfillment();
+        Merchant merchant = merchantService.getMerchantDetails(ONDCUtils.getBPPId(request));
         return ClientRequest.builder()
-                .headers(EkartUtils.getCommonEkartHeaders())
+                .headers(EkartUtils.getHeadersForMerchant(merchant))
                 .url(SERVICEABILITY_URL)
                 .body(getSLABody(fulfillment))
                 .build();
