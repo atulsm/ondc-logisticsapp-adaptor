@@ -23,6 +23,8 @@ public class Merchant {
     private String authHeader;
     @OneToOne
     @JoinColumn(name = "rateCardId" , referencedColumnName = "id")
-    private RateCard rateCardId;
+    private RateCard rateCard;
+
+    public RateCard getRateCard(){return this.rateCard;}
 
 }
