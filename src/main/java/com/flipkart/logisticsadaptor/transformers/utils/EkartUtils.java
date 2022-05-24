@@ -1,6 +1,7 @@
 package com.flipkart.logisticsadaptor.transformers.utils;
 
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
+import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.common.Descriptor;
 
 import java.util.HashMap;
@@ -24,4 +25,13 @@ public class EkartUtils {
                 .name(EkartConstants.EKART_PROVIDER_NAME)
                 .build();
     }
+
+    public static Map<String, String>  getHeadersForMerchant(Merchant merchant){
+        Map<String, String> headers = new HashMap<>();
+        headers.put(HEADER_HTTP_X_MERCHANT_CODE, merchant.getMerchantCode());
+        headers.put(HEADER_AUTHORIZATION, merchant.getAuthHeader());
+        //headers.put(HEADER_CONTENT_TYPE, "application/json");
+        return headers;
+    }
+
 }

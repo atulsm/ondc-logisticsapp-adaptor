@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.transformers.request_transformer;
 
+import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.*;
@@ -14,10 +15,12 @@ public class SearchRequestTransformerTest extends TestCase {
 
     @Inject
     ReverseGeocodeService reverseGeocodeService;
-    SearchRequestTransformer searchRequestTransformer = new SearchRequestTransformer(reverseGeocodeService);
+    @Inject
+    MerchantService merchantService;
+    SearchRequestTransformer searchRequestTransformer = new SearchRequestTransformer(reverseGeocodeService, merchantService);
 
     @Test
-    public void test(){
+    public void test() throws Exception{
         SearchMessage searchMessage = SearchMessage
                 .builder()
                 .intent(getIntent())

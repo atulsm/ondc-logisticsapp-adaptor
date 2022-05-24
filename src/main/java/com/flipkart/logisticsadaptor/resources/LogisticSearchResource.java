@@ -25,7 +25,7 @@ public class LogisticSearchResource {
     @Timed
     @UnitOfWork
     @Path("/v1")
-    public OnSearchRequest searchV1(SearchRequest searchRequest){
+    public OnSearchRequest searchV1(SearchRequest searchRequest) throws Exception{
         return logisticSearchOrchestrator.orchestrate(searchRequest);
     }
 }
