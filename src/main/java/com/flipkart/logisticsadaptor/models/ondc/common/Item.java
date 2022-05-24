@@ -4,6 +4,9 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Item
 {
     private String id;
