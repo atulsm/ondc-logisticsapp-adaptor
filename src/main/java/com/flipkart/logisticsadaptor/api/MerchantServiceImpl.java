@@ -9,7 +9,7 @@ public class MerchantServiceImpl implements MerchantService{
     MerchantDao merchantDao;
 
     @Inject
-    MerchantServiceImpl(MerchantDao merchantDao){
+    public MerchantServiceImpl(MerchantDao merchantDao){
         this.merchantDao = merchantDao;
     }
 

@@ -11,9 +11,13 @@ public class LogisticSearchOrchestrator  {
 
 
     private EkartAdaptorEngine ekartAdaptorEngine ;
+    private QuotationService quotationService;
+    private MerchantService merchantService;
     @Inject
-    public LogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
+    public LogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine, MerchantService merchantService, QuotationService quotationService){
         this.ekartAdaptorEngine = ekartAdaptorEngine;
+        this.merchantService = merchantService;
+        this.quotationService = quotationService;
     }
 
 

@@ -1,10 +1,9 @@
 package com.flipkart.logisticsadaptor.guice;
 
 import com.flipkart.logisticsadaptor.LogisticsAdaptorConfiguration;
-import com.flipkart.logisticsadaptor.api.LocalReverseGeocodeService;
-import com.flipkart.logisticsadaptor.api.LogisticSearchOrchestrator;
-import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
+import com.flipkart.logisticsadaptor.api.*;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
+import com.flipkart.logisticsadaptor.db.MerchantDao;
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
 import com.flipkart.logisticsadaptor.engine.EkartConfig;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
@@ -12,6 +11,7 @@ import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.*;
 import com.google.inject.Module;
 import com.google.inject.name.Named;
+import org.hibernate.SessionFactory;
 
 public class ServerModule implements Module {
     @Override
@@ -24,8 +24,8 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    public LogisticSearchOrchestrator provideLogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
-            return new LogisticSearchOrchestrator(ekartAdaptorEngine) ;
+    public LogisticSearchOrchestrator provideLogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine , QuotationService quotationService , MerchantService merchantService){
+            return new LogisticSearchOrchestrator(ekartAdaptorEngine, merchantService, quotationService) ;
     }
 
     @Provides
@@ -44,9 +44,32 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    private EkartConfig provideEkartConfig(LogisticsAdaptorConfiguration logisticsAdaptorConfiguration){
+    public EkartConfig provideEkartConfig(LogisticsAdaptorConfiguration logisticsAdaptorConfiguration){
         return logisticsAdaptorConfiguration.getEkartConfig();
     }
+
+
+    @Provides
+    @Singleton
+    public MerchantService provideMerchantService(MerchantDao merchantDao){
+        return new MerchantServiceImpl(merchantDao);
+    }
+
+    @Provides
+    @Singleton
+    public QuotationService provideQuotationService(){
+        return new QuotationServiceImpl();
+    }
+
+    @Inject
+    @Provides
+    @Singleton
+    public MerchantDao provideMerchantDao(SessionFactory sessionFactory){
+        return new MerchantDao(sessionFactory);
+    }
+
+
+
 
 
 
