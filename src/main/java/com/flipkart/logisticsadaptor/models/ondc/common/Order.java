@@ -19,7 +19,6 @@ public class Order
 {
     private String id;
     private String state;
-    @JsonProperty("bpp/items")
     private List<Item> items;
     private List<AddOn> addOns;
     private List<Offer> offers;

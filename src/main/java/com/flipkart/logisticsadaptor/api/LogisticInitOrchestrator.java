@@ -18,12 +18,12 @@ public class LogisticInitOrchestrator {
 
     public OnInitRequest orchestrate(InitRequest initRequest){
         OnInitRequest onInitRequest = new OnInitRequest();
-        onInitRequest.setContext(InitRequest.getContext());
-        onInitRequest.setMessage(getSearchMessage(initRequest));
-        return onSearchRequest;
+        onInitRequest.setContext(initRequest.getContext());
+        onInitRequest.setMessage(getInitMessage(initRequest));
+        return onInitRequest;
     }
 
-    private OnInitMessage getSearchMessage(InitRequest initRequest){
-        return ekartAdaptorEngine.get(initRequest);
+    private OnInitMessage getInitMessage(InitRequest initRequest){
+        return ekartAdaptorEngine.getInitResponse(initRequest);
     }
 }

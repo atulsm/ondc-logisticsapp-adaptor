@@ -8,6 +8,8 @@ import com.flipkart.logisticsadaptor.db.RateCardDao;
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
 import com.flipkart.logisticsadaptor.engine.EkartConfig;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.*;
 import com.google.inject.Module;
@@ -37,8 +39,28 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    public EkartAdaptorEngine provideEkartAdaptorEngine(@Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
-        return new EkartAdaptorEngine( searchRequestResponseMessageBaseClient) ;
+    public LogisticInitOrchestrator provideLogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
+        return new LogisticInitOrchestrator(ekartAdaptorEngine) ;
+    }
+
+    @Provides
+    @Singleton
+    @Inject
+    @Named("EKartSearchClient")
+    public EkartAdaptorEngine provideEkartAdaptorEngineSearch( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
+        EkartAdaptorEngine obj=new EkartAdaptorEngine();
+        obj.EkartAdaptorEngineSearch(searchRequestResponseMessageBaseClient);
+        return obj;
+    }
+
+    @Provides
+    @Singleton
+    @Inject
+    @Named("EKartInitClient")
+    public EkartAdaptorEngine provideEkartAdaptorEngineInit(@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient){
+        EkartAdaptorEngine obj=new EkartAdaptorEngine();
+        obj.EkartAdaptorEngineInit(initRequestOnInitMessageBaseClient);
+        return obj ;
     }
 
     @Provides
