@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.engine;
 
+import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
@@ -18,8 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EkartAdaptorEngine {
 
-
-    QuotationService quotationService;
+    @Inject
+    private QuotationService quotationService;
+    @Inject
+    private MerchantService merchantService;
     private BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient;
     private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
 
@@ -52,7 +55,7 @@ public class EkartAdaptorEngine {
             temp.getOrder().setItems(initRequest.getMessage().getOrder().getItems());
             temp.getOrder().setBilling(initRequest.getMessage().getOrder().getBilling());
             temp.getOrder().setFulfillment(initRequest.getMessage().getOrder().getFulfillment());
-        //    temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder()));
+            temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder(),merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
             return temp;
         }
         catch (Exception e){
