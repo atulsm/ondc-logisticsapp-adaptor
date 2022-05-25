@@ -10,9 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OnConfirmRequest {
-
+public class ConfirmRequest {
     private Context context;
 
-    private OnConfirmMessage message;
+    private ConfirmMessage message;
 }

@@ -1,6 +1,7 @@
 package com.flipkart.logisticsadaptor.resources;
 
 import com.codahale.metrics.annotation.Timed;
+import com.flipkart.logisticsadaptor.models.ondc.confirm.ConfirmRequest;
 import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchRequest;
@@ -21,8 +22,13 @@ public class LogisticConfirmResource {
     @Timed
     @UnitOfWork
     @Path("/v1")
-    public OnConfirmRequest confirmOrder(){
-        return null;
+    public OnConfirmRequest confirmOrder(ConfirmRequest confirmRequest){
+        return OnConfirmRequest.builder()
+                .context(confirmRequest.getContext())
+                .message(OnConfirmMessage.builder()
+                        .order(confirmRequest.getMessage().getOrder())
+                        .build())
+                .build();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.flipkart.logisticsadaptor.models.ondc.confirm;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.flipkart.logisticsadaptor.models.ondc.common.Context;
+import com.flipkart.logisticsadaptor.models.ondc.common.Order;
 import lombok.*;
 
 @Builder
@@ -10,9 +10,6 @@ import lombok.*;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OnConfirmRequest {
-
-    private Context context;
-
-    private OnConfirmMessage message;
+public class ConfirmMessage {
+    private Order order;
 }

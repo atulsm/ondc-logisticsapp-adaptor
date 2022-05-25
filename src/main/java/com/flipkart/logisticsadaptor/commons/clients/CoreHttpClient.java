@@ -150,7 +150,9 @@ public class CoreHttpClient<T> {
     }
 
     private CoreHttpResponse<T> call(HttpUriRequest httpUriRequest) throws Exception {
+        log.info(this.clientName , httpUriRequest);
         HttpResponse resp = httpClient.execute(httpUriRequest);
+        log.info(this.clientName , resp);
         return deserializeClientResponse(resp);
     }
 
