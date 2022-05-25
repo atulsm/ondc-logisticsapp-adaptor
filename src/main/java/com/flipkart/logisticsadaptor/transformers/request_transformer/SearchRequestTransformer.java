@@ -33,7 +33,7 @@ public class SearchRequestTransformer  implements RequestTransformer<SearchReque
     @Override
     public ClientRequest getClientRequest(SearchRequest request){
         Fulfillment fulfillment = request.getMessage().getIntent().getFulfillment();
-        Merchant merchant = merchantService.getMerchantDetails(ONDCUtils.getBPPId(request));
+        Merchant merchant = merchantService.getMerchantDetails(ONDCUtils.getBAPId(request));
         return ClientRequest.builder()
                 .headers(EkartUtils.getHeadersForMerchant(merchant))
                 .url(SERVICEABILITY_URL)

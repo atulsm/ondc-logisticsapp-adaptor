@@ -4,10 +4,15 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @Builder
-public class Price
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)public class Price
 {
     private String currency;
     private float value;
