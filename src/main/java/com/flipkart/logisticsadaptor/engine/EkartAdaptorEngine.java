@@ -59,7 +59,7 @@ public class EkartAdaptorEngine {
             return temp;
         }
         catch (Exception e){
-            log.error("Exception In getInitResponse : " + e.getMessage());
+            log.error("Exception In getIitResponse : " + e.getMessage());
         }
         return null;
     }
