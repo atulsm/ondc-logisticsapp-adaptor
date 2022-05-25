@@ -1,11 +1,5 @@
 package com.flipkart.logisticsadaptor.models.ekart;
 
-import com.ekart.domain.model.entity.Location;
-import com.ekl.durin.v2.constraints.LocationCodeOrAddressRequired;
-import com.ekl.durin.v2.services.validationGroups.BasicValidation;
-import com.ekl.durin.v2.services.validationGroups.CreateShipmentValidation;
-import com.ekl.durin.v2.utils.StaticUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -14,11 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 /**
  * Created by vaibhav.janardhan on 27/09/16.
