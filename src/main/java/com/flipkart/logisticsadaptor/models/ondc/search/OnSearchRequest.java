@@ -1,5 +1,5 @@
 
-package com.flipkart.logisticsadaptor.models.ondc;
+package com.flipkart.logisticsadaptor.models.ondc.search;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
