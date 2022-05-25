@@ -12,6 +12,7 @@ import com.flipkart.logisticsadaptor.api.QuotationService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import jdk.jfr.Name;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -21,14 +22,24 @@ public class EkartAdaptorEngine {
 
     @Inject
     private QuotationService quotationService;
-    @Inject
-    private MerchantService merchantService;
-    private BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient;
-    private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
 
     @Inject
-    public void EkartAdaptorEngineSearch(@Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
+    private MerchantService merchantService;
+
+    @Inject
+    @Named("EKartSearchClient")
+    private BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient;
+
+    @Inject
+    @Named("EKartInitClient")
+    private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
+
+
+    public  EkartAdaptorEngine(BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,BaseClient<InitRequest, OnInitMessage > initRequestResponseMessageBaseClient,MerchantService merchantService,QuotationService quotationService){
         this.searchRequestResponseMessageBaseClient = searchRequestResponseMessageBaseClient;
+        this.initRequestResponseMessageBaseClient = initRequestResponseMessageBaseClient;
+        this.quotationService=quotationService;
+        this.merchantService=merchantService;
     }
 
 
@@ -42,11 +53,6 @@ public class EkartAdaptorEngine {
        return null;
     }
 
-
-    @Inject
-    public void EkartAdaptorEngineInit (@Named("EKartInitClient") BaseClient<InitRequest, OnInitMessage > initRequestResponseMessageBaseClient){
-        this.initRequestResponseMessageBaseClient = initRequestResponseMessageBaseClient;
-    }
 
 
     public OnInitMessage getInitResponse(InitRequest initRequest){

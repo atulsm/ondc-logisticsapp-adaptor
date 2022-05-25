@@ -39,29 +39,17 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    public LogisticInitOrchestrator provideLogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
-        return new LogisticInitOrchestrator(ekartAdaptorEngine) ;
+    public LogisticInitOrchestrator provideLogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine, QuotationService quotationService , MerchantService merchantService){
+        return new LogisticInitOrchestrator(ekartAdaptorEngine, merchantService, quotationService) ;
     }
 
     @Provides
     @Singleton
     @Inject
-    @Named("EKartSearchClient")
-    public EkartAdaptorEngine provideEkartAdaptorEngineSearch( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
-        EkartAdaptorEngine obj=new EkartAdaptorEngine();
-        obj.EkartAdaptorEngineSearch(searchRequestResponseMessageBaseClient);
-        return obj;
+    public EkartAdaptorEngine provideEkartAdaptorEngine( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient, QuotationService quotationService , MerchantService merchantService){
+       return new EkartAdaptorEngine(searchRequestResponseMessageBaseClient,initRequestOnInitMessageBaseClient, merchantService, quotationService);
     }
 
-    @Provides
-    @Singleton
-    @Inject
-    @Named("EKartInitClient")
-    public EkartAdaptorEngine provideEkartAdaptorEngineInit(@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient){
-        EkartAdaptorEngine obj=new EkartAdaptorEngine();
-        obj.EkartAdaptorEngineInit(initRequestOnInitMessageBaseClient);
-        return obj ;
-    }
 
     @Provides
     @Singleton

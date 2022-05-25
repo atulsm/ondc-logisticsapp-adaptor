@@ -9,9 +9,14 @@ import com.google.inject.Inject;
 public class LogisticInitOrchestrator {
 
     private EkartAdaptorEngine ekartAdaptorEngine ;
+    private QuotationService quotationService;
+    private MerchantService merchantService;
+
     @Inject
-    public LogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine){
+    public LogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine,MerchantService merchantService, QuotationService quotationService){
         this.ekartAdaptorEngine = ekartAdaptorEngine;
+        this.merchantService = merchantService;
+        this.quotationService = quotationService;
     }
 
 
