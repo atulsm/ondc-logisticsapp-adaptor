@@ -3,13 +3,9 @@ package com.flipkart.logisticsadaptor.models.ekart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Strings;
-import io.dropwizard.jackson.JsonSnakeCase;
+import com.flipkart.logisticsadaptor.models.ekart.enums.ServiceTypes;
 import lombok.*;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 @Builder
