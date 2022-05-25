@@ -89,6 +89,14 @@ public class ServerModule implements Module {
     }
 
 
+    @Provides
+    @Singleton
+    public PaymentDetailsService providePaymentDetailsService(){
+        return new StaticPaymentDetailsService();
+    }
+
+
+
 
 
 
