@@ -1,6 +1,7 @@
 package com.flipkart.logisticsadaptor.engine;
 
 import com.flipkart.logisticsadaptor.api.MerchantService;
+import com.flipkart.logisticsadaptor.api.PaymentDetailsService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.models.ekart.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
@@ -20,11 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EkartAdaptorEngine {
 
-    @Inject
-    private QuotationService quotationService;
 
-    @Inject
+    private QuotationService quotationService;
     private MerchantService merchantService;
+    private PaymentDetailsService paymentDetailsService;
 
     @Inject
     @Named("EKartSearchClient")
@@ -35,11 +35,12 @@ public class EkartAdaptorEngine {
     private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
 
 
-    public  EkartAdaptorEngine(BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,BaseClient<InitRequest, OnInitMessage > initRequestResponseMessageBaseClient,MerchantService merchantService,QuotationService quotationService){
+    public  EkartAdaptorEngine(BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,BaseClient<InitRequest, OnInitMessage > initRequestResponseMessageBaseClient,MerchantService merchantService,QuotationService quotationService,PaymentDetailsService paymentDetailsService){
         this.searchRequestResponseMessageBaseClient = searchRequestResponseMessageBaseClient;
         this.initRequestResponseMessageBaseClient = initRequestResponseMessageBaseClient;
         this.quotationService=quotationService;
         this.merchantService=merchantService;
+        this.paymentDetailsService=paymentDetailsService;
     }
 
 
@@ -62,6 +63,7 @@ public class EkartAdaptorEngine {
             temp.getOrder().setBilling(initRequest.getMessage().getOrder().getBilling());
             temp.getOrder().setFulfillment(initRequest.getMessage().getOrder().getFulfillment());
             temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder(),merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
+            temp.getOrder().setPayment(paymentDetailsService.getPaymentDetails(temp.getOrder(),merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
             return temp;
         }
         catch (Exception e){

@@ -46,8 +46,8 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    public EkartAdaptorEngine provideEkartAdaptorEngine( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient, QuotationService quotationService , MerchantService merchantService){
-       return new EkartAdaptorEngine(searchRequestResponseMessageBaseClient,initRequestOnInitMessageBaseClient, merchantService, quotationService);
+    public EkartAdaptorEngine provideEkartAdaptorEngine( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient, QuotationService quotationService , MerchantService merchantService,PaymentDetailsService paymentDetailsService){
+       return new EkartAdaptorEngine(searchRequestResponseMessageBaseClient,initRequestOnInitMessageBaseClient, merchantService, quotationService,paymentDetailsService);
     }
 
 

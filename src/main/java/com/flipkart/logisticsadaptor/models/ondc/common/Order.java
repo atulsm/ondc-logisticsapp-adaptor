@@ -4,6 +4,7 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -32,6 +33,10 @@ public class Order
 
     @JsonProperty("payment")
     private Payment payment;
+
+
+    @JsonIgnore
+    private boolean isCOD;
 
     private String createdAt;
     private String updatedAt;
@@ -134,6 +139,14 @@ public class Order
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
+
+    public boolean isCOD() {
+        return isCOD;
+    }
+
+    public void setCOD(boolean COD) {
+        isCOD = COD;
+    }
 
 	@Override
     public boolean equals(final Object o) {

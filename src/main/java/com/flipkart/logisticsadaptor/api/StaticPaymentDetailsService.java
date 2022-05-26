@@ -22,9 +22,15 @@ public class StaticPaymentDetailsService implements PaymentDetailsService{
     }
 
     private PaymentParams getPaymentParams(Order order, RateCard rateCard){
-        return PaymentParams.builder()
-                .mode(COD_MODE)
-                .amount(String.valueOf(rateCard.getBasePrice()))
-                .build();
+        if(order.isCOD()) {
+            return PaymentParams.builder()
+                    .mode(COD_MODE)
+                    .amount(String.valueOf(rateCard.getBasePrice()))
+                    .build();
+        }
+        else{
+            return PaymentParams.builder()
+                    .build();
+        }
     }
 }
