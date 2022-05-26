@@ -3,6 +3,7 @@ package com.flipkart.logisticsadaptor.models.ekart;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.flipkart.logisticsadaptor.models.ekart.enums.ServiceCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
 public class Service {
 
-    private String serviceCode;
+    private String serviceCode = ServiceCode.REGULAR.name();
 
     private List<ServiceDetail> serviceDetails;
 

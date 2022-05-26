@@ -37,9 +37,6 @@ public class ServiceDetail {
     @Valid
     private ShipmentDetails shipment;
 
-    @JsonIgnore
-    private String movementType;
-
     private PackingPolicy packingPolicy = PackingPolicy.DEFAULT;
 
     @JsonIgnore

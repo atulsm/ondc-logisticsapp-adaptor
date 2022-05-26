@@ -4,32 +4,25 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
-import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
-public class ShipmentDetails {
+public class ShipmentDimension {
 
-    private String clientReferenceId;
+    private Measurement length;
 
-    private String trackingId;
+    private Measurement breadth;
 
-    private String shipmentValue;
+    private Measurement height;
 
-    @Valid
-    private ShipmentDimension shipmentDimensions;
+    private Weight weight;
 
-    private String returnLabelDesc_1;
-
-    private String returnLabelDesc_2;
-
-    @Valid
-    private List<ShipmentItems> shipmentItems;
 }
