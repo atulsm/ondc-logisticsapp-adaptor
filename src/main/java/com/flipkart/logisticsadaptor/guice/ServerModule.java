@@ -8,6 +8,8 @@ import com.flipkart.logisticsadaptor.db.RateCardDao;
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
 import com.flipkart.logisticsadaptor.engine.EkartConfig;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.*;
 import com.google.inject.Module;
@@ -37,9 +39,17 @@ public class ServerModule implements Module {
     @Provides
     @Singleton
     @Inject
-    public EkartAdaptorEngine provideEkartAdaptorEngine(@Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient){
-        return new EkartAdaptorEngine( searchRequestResponseMessageBaseClient) ;
+    public LogisticInitOrchestrator provideLogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine, QuotationService quotationService , MerchantService merchantService){
+        return new LogisticInitOrchestrator(ekartAdaptorEngine, merchantService, quotationService) ;
     }
+
+    @Provides
+    @Singleton
+    @Inject
+    public EkartAdaptorEngine provideEkartAdaptorEngine( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient, QuotationService quotationService , MerchantService merchantService,PaymentDetailsService paymentDetailsService){
+       return new EkartAdaptorEngine(searchRequestResponseMessageBaseClient,initRequestOnInitMessageBaseClient, merchantService, quotationService,paymentDetailsService);
+    }
+
 
     @Provides
     @Singleton

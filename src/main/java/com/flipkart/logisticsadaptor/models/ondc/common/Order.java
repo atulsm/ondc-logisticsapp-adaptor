@@ -4,8 +4,22 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order
 {
     private String id;
@@ -16,7 +30,14 @@ public class Order
     private Billing billing;
     private Fulfillment fulfillment;
     private Quotation quote;
+
+    @JsonProperty("payment")
     private Payment payment;
+
+
+    @JsonIgnore
+    private boolean isCOD;
+
     private String createdAt;
     private String updatedAt;
     private Provider provider;
@@ -97,7 +118,8 @@ public class Order
     public void setQuote(final Quotation quote) {
         this.quote = quote;
     }
-    
+
+    @JsonProperty("payment")
     public void setPayment(final Payment payment) {
         this.payment = payment;
     }
@@ -117,6 +139,15 @@ public class Order
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
+
+    @JsonIgnore
+    public boolean isCOD() {
+        return isCOD;
+    }
+    @JsonIgnore
+    public void setCOD(boolean COD) {
+        isCOD = COD;
+    }
 
 	@Override
     public boolean equals(final Object o) {

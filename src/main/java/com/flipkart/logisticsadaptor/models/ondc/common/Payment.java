@@ -4,13 +4,17 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Payment
 {
     private String uri;
     private String tlMethod;
+    @JsonProperty("params")
     private PaymentParams params;
     private String type;
     private String status;
@@ -47,7 +51,8 @@ public class Payment
     public void setTlMethod(final String tlMethod) {
         this.tlMethod = tlMethod;
     }
-    
+
+    @JsonProperty("params")
     public void setParams(final PaymentParams params) {
         this.params = params;
     }

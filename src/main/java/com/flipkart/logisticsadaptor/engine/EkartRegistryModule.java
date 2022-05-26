@@ -8,8 +8,12 @@ import com.flipkart.logisticsadaptor.commons.clients.CoreHttpClient;
 import com.flipkart.logisticsadaptor.commons.utils.CustomObjectMapper;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
 import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.flipkart.logisticsadaptor.transformers.request_transformer.InitRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.SearchRequestTransformer;
+import com.flipkart.logisticsadaptor.transformers.response_transformer.InitResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.SearchResponseTransformer;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -47,6 +51,33 @@ public class EkartRegistryModule extends AbstractModule {
                 HttpClientBuilder.create().build(),
                 CustomObjectMapper.getJavaType(CheckServiceabilityResponse.class),
                 EkartConstants.SEARCH
+        );
+    }
+
+    @Provides
+    @Singleton
+   @Named("EKartInitClient")
+    @Inject
+    BaseClient<InitRequest, OnInitMessage> provideEkartInitClient(@Named("EKartInitHttpClient")CoreHttpClient<CheckServiceabilityResponse> httpClient,
+                                                                  ReverseGeocodeService reverseGeocodeService){
+        return new BasicHttpClient<>(
+                httpClient,
+                new InitRequestTransformer(reverseGeocodeService),
+                new InitResponseTransformer()
+        );
+    }
+
+    @Provides
+    @Singleton
+    @Named("EKartInitHttpClient")
+    @Inject
+    CoreHttpClient<CheckServiceabilityResponse>  provideEkartInitHttpClient(EkartConfig ekartConfig){
+        return new CoreHttpClient<>(ekartConfig.getEKartHost(),
+                ekartConfig.getPort(),
+                CoreHttpClient.HTTP_METHOD.POST,
+                HttpClientBuilder.create().build(),
+                CustomObjectMapper.getJavaType(CheckServiceabilityResponse.class),
+                EkartConstants.INIT
         );
     }
 

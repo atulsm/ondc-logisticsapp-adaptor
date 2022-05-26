@@ -4,14 +4,17 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentParams
 {
     private String transactionId;
     private String amount;
+    @JsonProperty("mode")
     private String mode;
     private String vpa;
     @JsonProperty("additionalProp1")
@@ -56,7 +59,8 @@ public class PaymentParams
     public void setAmount(final String amount) {
         this.amount = amount;
     }
-    
+
+    @JsonProperty("mode")
     public void setMode(final String mode) {
         this.mode = mode;
     }

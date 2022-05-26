@@ -37,7 +37,9 @@ public class LocalReverseGeocodeService implements ReverseGeocodeService{
 
     @Override
     public Integer getPincodeFromLatLong(Geocode geocode) {
-        return pincodeCsvModelHashMap.get(getHashForGeoCode(geocode));
+        Integer pincode=pincodeCsvModelHashMap.get(getHashForGeoCode(geocode));
+        if(pincode== null)return new Integer(560042);
+        return pincode;
     }
 
     private String getHashForGeoCode(Geocode geocode){
