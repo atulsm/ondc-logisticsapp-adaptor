@@ -1,6 +1,6 @@
 package com.flipkart.logisticsadaptor.db;
 
-import com.flipkart.logisticsadaptor.models.ekart.internal.RateCard;
+import com.flipkart.logisticsadaptor.commons.models.internal.RateCard;
 import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

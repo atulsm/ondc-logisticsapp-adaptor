@@ -1,6 +1,6 @@
 package com.flipkart.logisticsadaptor.api;
 
-import com.flipkart.logisticsadaptor.models.Geocode;
+import com.flipkart.logisticsadaptor.commons.models.Geocode;
 
 public interface ReverseGeocodeService {
 

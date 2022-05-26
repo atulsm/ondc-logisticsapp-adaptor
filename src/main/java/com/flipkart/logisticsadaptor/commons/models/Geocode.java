@@ -1,4 +1,4 @@
-package com.flipkart.logisticsadaptor.models;
+package com.flipkart.logisticsadaptor.commons.models;
 
 import lombok.Builder;
 import lombok.Getter;

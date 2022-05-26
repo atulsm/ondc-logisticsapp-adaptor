@@ -1,7 +1,7 @@
 package com.flipkart.logisticsadaptor.transformers.utils;
 
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
-import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
+import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
 import com.flipkart.logisticsadaptor.models.ondc.common.Descriptor;
 
 import java.util.HashMap;

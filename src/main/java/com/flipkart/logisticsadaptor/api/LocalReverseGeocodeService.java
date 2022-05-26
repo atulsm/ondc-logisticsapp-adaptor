@@ -1,13 +1,12 @@
 package com.flipkart.logisticsadaptor.api;
 
-import com.flipkart.logisticsadaptor.models.Geocode;
+import com.flipkart.logisticsadaptor.commons.models.Geocode;
 import com.flipkart.logisticsadaptor.models.csv.PincodeCsvModel;
 import com.flipkart.logisticsadaptor.utils.CSVUtils;
 
 import javax.inject.Singleton;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
