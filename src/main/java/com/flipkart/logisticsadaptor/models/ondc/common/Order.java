@@ -140,10 +140,11 @@ public class Order
 		this.provider = provider;
 	}
 
+    @JsonIgnore
     public boolean isCOD() {
         return isCOD;
     }
-
+    @JsonIgnore
     public void setCOD(boolean COD) {
         isCOD = COD;
     }
