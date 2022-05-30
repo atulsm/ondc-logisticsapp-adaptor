@@ -6,7 +6,7 @@ import com.google.inject.Inject;
 public class OrderServiceImpl implements OrderService {
 
     @Inject
-    OrderDetailsDao orderDetailsDao;
+    private OrderDetailsDao orderDetailsDao;
 
     @Override
     public String getTrackingIdForOrder(String orderId) {
