@@ -1,5 +1,6 @@
 package com.flipkart.logisticsadaptor.commons.models;
 
+import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
@@ -24,9 +25,7 @@ public class AdaptorRequest {
 
     private Context context;
 
-    private CheckServiceabilityResponse checkServiceabilityResponse = null;
-
-    private CreateShipmentResponse createShipmentResponse = null;
+    private Merchant merchant;
 
 
     public AdaptorRequest(ConfirmRequest confirmRequest){
@@ -34,7 +33,6 @@ public class AdaptorRequest {
         context = confirmRequest.getContext();
         order = confirmRequest.getMessage().getOrder();
     }
-
 
 
 

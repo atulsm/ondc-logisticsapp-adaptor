@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Order {
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private String orderId;
 
     @Column(name = "tracking_id" , nullable = false)

@@ -70,4 +70,8 @@ public class EkartAdaptorEngine {
         return null;
     }
 
+    public OnConfirmMessage getConfirmMessage(AdaptorRequest adaptorRequest) throws Exception{
+        return confirmBaseClient.execute(adaptorRequest);
+    }
+
 }
