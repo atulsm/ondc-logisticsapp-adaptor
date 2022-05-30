@@ -48,7 +48,7 @@ public class ServiceData {
 
     private String logisticsType= LogisticsType.E2E_EKL.getName();
 
-    private String amountToCollect;
+    private Integer amountToCollect;
 
     @Valid
     private List<ServiceType> serviceTypes;

@@ -35,8 +35,8 @@ public class ConfirmOrderOrchestractor {
             AdaptorRequest adaptorRequest = new AdaptorRequest(confirmRequest);
             Merchant merchant = merchantService.getMerchantDetails(confirmRequest.getContext());
             adaptorRequest.setMerchant(merchant);
-            adaptorRequest = ekartAdaptorEngine.processOrder(adaptorRequest);
             adaptorRequest.setOrder(processOrder(adaptorRequest));
+            adaptorRequest = ekartAdaptorEngine.processOrder(adaptorRequest);
             request.setContext(confirmRequest.getContext());
             request.setMessage(getOnConfirmMessage(adaptorRequest));
             orderService.persistsOrder(adaptorRequest);
