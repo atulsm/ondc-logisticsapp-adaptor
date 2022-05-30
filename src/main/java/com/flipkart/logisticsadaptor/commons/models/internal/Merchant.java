@@ -1,4 +1,4 @@
-package com.flipkart.logisticsadaptor.models.ekart.internal;
+package com.flipkart.logisticsadaptor.commons.models.internal;
 
 import lombok.*;
 import org.hibernate.annotations.Cache;

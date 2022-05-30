@@ -1,6 +1,6 @@
 package com.flipkart.logisticsadaptor.api;
 
-import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
+import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
 
 public interface MerchantService {
 

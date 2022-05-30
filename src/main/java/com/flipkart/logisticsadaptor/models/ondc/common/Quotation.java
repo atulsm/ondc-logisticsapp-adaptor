@@ -4,11 +4,17 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.common;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.util.List;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Quotation
 {
     private Price price;

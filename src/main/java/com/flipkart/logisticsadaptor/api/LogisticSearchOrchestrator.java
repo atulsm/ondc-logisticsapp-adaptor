@@ -1,8 +1,8 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
-import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
-import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
+import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.Inject;
 

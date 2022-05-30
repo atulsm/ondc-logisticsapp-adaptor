@@ -5,8 +5,8 @@ import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
-import com.flipkart.logisticsadaptor.models.Geocode;
-import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
+import com.flipkart.logisticsadaptor.commons.models.internal.Geocode;
+import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.Fulfillment;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
@@ -33,7 +33,7 @@ public class SearchRequestTransformer  implements RequestTransformer<SearchReque
     @Override
     public ClientRequest getClientRequest(SearchRequest request){
         Fulfillment fulfillment = request.getMessage().getIntent().getFulfillment();
-        Merchant merchant = merchantService.getMerchantDetails(ONDCUtils.getBPPId(request));
+        Merchant merchant = merchantService.getMerchantDetails(ONDCUtils.getBAPId(request));
         return ClientRequest.builder()
                 .headers(EkartUtils.getHeadersForMerchant(merchant))
                 .url(SERVICEABILITY_URL)

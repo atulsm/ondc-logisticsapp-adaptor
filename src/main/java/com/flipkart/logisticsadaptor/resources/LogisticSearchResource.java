@@ -2,7 +2,7 @@ package com.flipkart.logisticsadaptor.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.flipkart.logisticsadaptor.api.LogisticSearchOrchestrator;
-import com.flipkart.logisticsadaptor.models.ondc.OnSearchRequest;
+import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchRequest;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;

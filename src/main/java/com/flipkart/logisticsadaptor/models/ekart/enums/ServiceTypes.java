@@ -1,4 +1,4 @@
-package com.flipkart.logisticsadaptor.models.ekart;
+package com.flipkart.logisticsadaptor.models.ekart.enums;
 
 
 import com.google.common.base.Strings;

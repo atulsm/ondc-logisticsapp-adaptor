@@ -5,7 +5,7 @@ import com.flipkart.logisticsadaptor.commons.models.ResponseTransformer;
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
 import com.flipkart.logisticsadaptor.models.ekart.ConnectionsServiceabilityResponse;
-import com.flipkart.logisticsadaptor.models.ondc.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.common.Catalog;
 import com.flipkart.logisticsadaptor.models.ondc.common.Category;
 import com.flipkart.logisticsadaptor.models.ondc.common.Descriptor;
