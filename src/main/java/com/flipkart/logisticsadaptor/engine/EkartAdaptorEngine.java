@@ -10,8 +10,10 @@ import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
+import com.flipkart.logisticsadaptor.models.ondc.ontrack.OnTrackMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
 import com.flipkart.logisticsadaptor.api.QuotationService;
+import com.flipkart.logisticsadaptor.models.ondc.track.TrackRequest;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -56,6 +58,15 @@ public class EkartAdaptorEngine {
        return null;
     }
 
+    public OnTrackMessage getTrackResponse(TrackRequest trackRequest){
+        try{
+
+        }
+        catch (Exception e){
+            log.error("Exception In getSearchResponse : " + e.getMessage());
+        }
+        return null;
+    }
 
 
     public OnInitMessage getInitResponse(InitRequest initRequest){
