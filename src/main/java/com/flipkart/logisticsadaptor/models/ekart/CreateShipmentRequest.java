@@ -19,8 +19,11 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
 public class CreateShipmentRequest {
+    @Builder.Default
     private String requestId = UUID.randomUUID().toString();
     private String clientName;
+
+    @Builder.Default
     private String goodsCategory = GoodsCategory.NON_ESSENTIAL.name();
     private List<Service> services;
 

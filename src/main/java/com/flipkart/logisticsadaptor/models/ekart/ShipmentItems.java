@@ -5,14 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -62,6 +65,20 @@ public class ShipmentItems {
 
     @JsonIgnore
     private boolean dangerous;
+
+    public void setOrderId(String orderId){
+        Pair pair = new Pair("order_id", orderId);
+        if(itemAttributes == null) itemAttributes = new ArrayList<>();
+        itemAttributes.add(pair);
+    }
+
+    public void setInvoiceId(String invoiceId){
+        Pair pair = new Pair("invoice_id", invoiceId);
+        if(itemAttributes == null) itemAttributes = new ArrayList<>();
+        itemAttributes.add(pair);
+    }
+
+
 
 
 }

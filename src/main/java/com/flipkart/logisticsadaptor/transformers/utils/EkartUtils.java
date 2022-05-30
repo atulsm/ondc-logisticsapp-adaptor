@@ -2,15 +2,16 @@ package com.flipkart.logisticsadaptor.transformers.utils;
 
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
+import com.flipkart.logisticsadaptor.models.ekart.*;
 import com.flipkart.logisticsadaptor.models.ekart.Address;
-import com.flipkart.logisticsadaptor.models.ekart.Locations;
-import com.flipkart.logisticsadaptor.models.ekart.ShipmentDimension;
-import com.flipkart.logisticsadaptor.models.ekart.Weight;
 import com.flipkart.logisticsadaptor.models.ondc.common.*;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EkartUtils {
@@ -82,8 +83,8 @@ public class EkartUtils {
                 .emailId(contact.getEmail())
                 .primaryContactNumber(contact.getPhone())
                 .firstName(person.getName())
-                .addressLine1(String.join(address.getDoor(),  ", " ,  address.getName()))
-                .addressLine2(String.join(address.getBuilding(), ", ", address.getLocality(), " ,", address.getStreet()))
+                .addressLine1(join(address.getDoor(),  ", " ,  address.getName()))
+                .addressLine2(join(address.getBuilding(), ", ", address.getLocality(), " ,", address.getStreet()))
                 .pincode(address.getAreaCode())
                 .city(address.getCity())
                 .state(address.getState())
@@ -105,6 +106,35 @@ public class EkartUtils {
                 .weight(new Weight(12))
                 .build();
 
+    }
+
+    public static List<ShipmentItems> getShipmentItems(Order order){
+        List<ShipmentItems> shipmentItems = new ArrayList<>();
+        String orderId = order.getId();
+        for(Item item: order.getItems()){
+            shipmentItems.add(getShipmentItem(item, orderId, orderId));
+        }
+        return shipmentItems;
+    }
+
+    public static ShipmentItems getShipmentItem(Item item, String orderId , String invoiceId){
+            ShipmentItems shipmentItems =  ShipmentItems.builder()
+                                            .productId(item.getId())
+                                            .quantity(item.getQuantity().getCount())
+                                            .build();
+            shipmentItems.setOrderId(orderId);
+            shipmentItems.setInvoiceId(invoiceId);
+            return shipmentItems;
+    }
+
+    public static String join(String... strings){
+        String res = "";
+        for(String s: strings){
+            if(s != null && s.length() > 1){
+                res = res + s + " ";
+            }
+        }
+        return res;
     }
 
 

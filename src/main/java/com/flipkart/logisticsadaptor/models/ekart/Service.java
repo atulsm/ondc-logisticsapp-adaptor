@@ -18,6 +18,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
 public class Service {
 
+    @Builder.Default
     private String serviceCode = ServiceCode.REGULAR.name();
 
     private List<ServiceDetail> serviceDetails;

@@ -25,6 +25,7 @@ public class ServiceDetail {
 
     private String tier;
 
+    @Builder.Default
     private String serviceLeg = ServiceLegs.FORWARD.name();
     @NotNull(message = "Service data is null")
     @Valid
@@ -33,6 +34,7 @@ public class ServiceDetail {
     @Valid
     private ShipmentDetails shipment;
 
+    @Builder.Default
     private PackingPolicy packingPolicy = PackingPolicy.DEFAULT;
 
     @JsonIgnore

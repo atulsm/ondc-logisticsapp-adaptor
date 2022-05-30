@@ -54,11 +54,11 @@ public class ConfirmRequestTransformer implements RequestTransformer<AdaptorRequ
     }
 
     public ShipmentDetails getShipmentDetails(AdaptorRequest adaptorRequest){
-
             return ShipmentDetails.builder()
                     .trackingId(getTrackingIdForMerchant(adaptorRequest.getMerchant(), true))
                     .shipmentValue(getAmountInRupees(adaptorRequest.getOrder()))
                     .shipmentDimensions(getShipmentDimensions(adaptorRequest.getOrder()))
+                    .shipmentItems(getShipmentItems(adaptorRequest.getOrder()))
                     .build();
     }
 
