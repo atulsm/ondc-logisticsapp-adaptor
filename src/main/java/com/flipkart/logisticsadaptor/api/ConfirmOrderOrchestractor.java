@@ -10,8 +10,6 @@ import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmRequest;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.file.LinkOption;
-
 @Slf4j
 public class ConfirmOrderOrchestractor {
 
@@ -37,11 +35,10 @@ public class ConfirmOrderOrchestractor {
             AdaptorRequest adaptorRequest = new AdaptorRequest(confirmRequest);
             Merchant merchant = merchantService.getMerchantDetails(confirmRequest.getContext());
             adaptorRequest.setMerchant(merchant);
-            OnConfirmMessage onConfirmMessage =  ekartAdaptorEngine.getConfirmMessage(adaptorRequest);
-            onConfirmMessage = processMessage(onConfirmMessage, merchant);
+            adaptorRequest = ekartAdaptorEngine.processOrder(adaptorRequest);
+            adaptorRequest.setOrder(processOrder(adaptorRequest));
             request.setContext(confirmRequest.getContext());
-            request.setMessage(onConfirmMessage);
-            adaptorRequest.setOrder(onConfirmMessage.getOrder());
+            request.setMessage(getOnConfirmMessage(adaptorRequest));
             orderService.persistsOrder(adaptorRequest);
         }
         catch (Exception e){
@@ -50,10 +47,17 @@ public class ConfirmOrderOrchestractor {
         return request;
     }
 
-    private OnConfirmMessage processMessage(OnConfirmMessage onConfirmMessage , Merchant merchant){
-        Order order = onConfirmMessage.getOrder();
-        onConfirmMessage.getOrder().setPayment(paymentDetailsService.getPaymentDetails(order, merchant));
-        onConfirmMessage.getOrder().setQuote(quotationService.getQuotationForOrder(order, merchant));
+    private Order processOrder(AdaptorRequest adaptorRequest){
+        Order order = adaptorRequest.getOrder();
+        Merchant merchant = adaptorRequest.getMerchant();
+        order.setPayment(paymentDetailsService.getPaymentDetails(order, merchant));
+        order.setQuote(quotationService.getQuotationForOrder(order, merchant));
+        return order;
+    }
+
+    private OnConfirmMessage getOnConfirmMessage(AdaptorRequest adaptorRequest){
+        OnConfirmMessage onConfirmMessage = new OnConfirmMessage(adaptorRequest.getOrder());
         return onConfirmMessage;
     }
+
 }

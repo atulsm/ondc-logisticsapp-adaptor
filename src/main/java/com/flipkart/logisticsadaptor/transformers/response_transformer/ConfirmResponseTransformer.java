@@ -5,9 +5,9 @@ import com.flipkart.logisticsadaptor.commons.models.ResponseTransformer;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 
-public class ConfirmResponseTransformer implements ResponseTransformer<CreateShipmentResponse , OnConfirmMessage> {
+public class ConfirmResponseTransformer implements ResponseTransformer<CreateShipmentResponse , CreateShipmentResponse> {
     @Override
-    public OnConfirmMessage convertResponse(CreateShipmentResponse responseTransformerInput) {
-        return null;
+    public CreateShipmentResponse convertResponse(CreateShipmentResponse responseTransformerInput) {
+        return responseTransformerInput;
     }
 }

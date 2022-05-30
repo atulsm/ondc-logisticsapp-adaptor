@@ -4,6 +4,7 @@ import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.PaymentDetailsService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
+import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
@@ -38,7 +39,7 @@ public class EkartAdaptorEngine {
 
     @Inject
     @Named("EKartConfirmClient")
-    private BaseClient<AdaptorRequest, OnConfirmMessage> confirmBaseClient;
+    private BaseClient<AdaptorRequest, CreateShipmentResponse> confirmBaseClient;
 
 
 
@@ -70,8 +71,10 @@ public class EkartAdaptorEngine {
         return null;
     }
 
-    public OnConfirmMessage getConfirmMessage(AdaptorRequest adaptorRequest) throws Exception{
-        return confirmBaseClient.execute(adaptorRequest);
+    public AdaptorRequest processOrder(AdaptorRequest adaptorRequest) throws Exception{
+        CreateShipmentResponse createShipmentResponse  = confirmBaseClient.execute(adaptorRequest);
+        adaptorRequest.setCreateShipmentResponse(createShipmentResponse);
+        return adaptorRequest;
     }
 
 }

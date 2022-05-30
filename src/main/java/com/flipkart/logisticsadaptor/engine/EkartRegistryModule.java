@@ -90,7 +90,7 @@ public class EkartRegistryModule extends AbstractModule {
     @Singleton
     @Named("EKartConfirmClient")
     @Inject
-    BaseClient<AdaptorRequest, OnConfirmMessage> provideEkartConfirmClient(@Named("EKartConfirmHttpClient") CoreHttpClient<CreateShipmentResponse> httpClient,
+    BaseClient<AdaptorRequest, CreateShipmentResponse> provideEkartConfirmClient(@Named("EKartConfirmHttpClient") CoreHttpClient<CreateShipmentResponse> httpClient,
                                                                            ConfirmRequestTransformer confirmRequestTransformer,
                                                                            ConfirmResponseTransformer confirmResponseTransformer){
         return new BasicHttpClient<>(

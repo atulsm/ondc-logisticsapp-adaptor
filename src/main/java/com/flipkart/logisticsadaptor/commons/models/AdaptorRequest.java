@@ -27,6 +27,8 @@ public class AdaptorRequest {
 
     private Merchant merchant;
 
+    private CreateShipmentResponse createShipmentResponse;
+
 
     public AdaptorRequest(ConfirmRequest confirmRequest){
         requestType = RequestType.CONFIRM;
