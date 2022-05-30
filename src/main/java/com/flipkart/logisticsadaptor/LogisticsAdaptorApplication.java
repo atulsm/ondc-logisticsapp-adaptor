@@ -1,6 +1,7 @@
 package com.flipkart.logisticsadaptor;
 
 import com.flipkart.logisticsadaptor.api.LogisticsAdaptorService;
+import com.flipkart.logisticsadaptor.commons.models.internal.Order;
 import com.flipkart.logisticsadaptor.core.Bucket;
 import com.flipkart.logisticsadaptor.db.BucketDao;
 import com.flipkart.logisticsadaptor.engine.EkartRegistryModule;
@@ -22,7 +23,7 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
         new LogisticsAdaptorApplication().run(args);
     }
 
-    private final HibernateBundle<LogisticsAdaptorConfiguration> hibernate = new HibernateBundle<LogisticsAdaptorConfiguration>(Bucket.class, Merchant.class, RateCard.class) {
+    private final HibernateBundle<LogisticsAdaptorConfiguration> hibernate = new HibernateBundle<LogisticsAdaptorConfiguration>(Bucket.class, Merchant.class, RateCard.class, Order.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(LogisticsAdaptorConfiguration configuration) {
             return configuration.getDataSourceFactory();

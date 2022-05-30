@@ -27,13 +27,13 @@ public class Order {
     @Column(name = "merchant_code" , nullable = false)
     private String merchantCode;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created", nullable = false)
-    private Date created;
+    @Column(name = "order_status", nullable = false)
+    private String status;
 
-    @PrePersist
-    protected void onCreate() {
-         created = new Date();
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false)
+    @Builder.Default
+    private Date created = new Date();
+
 
 }

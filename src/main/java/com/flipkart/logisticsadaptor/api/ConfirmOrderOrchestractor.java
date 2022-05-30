@@ -49,6 +49,7 @@ public class ConfirmOrderOrchestractor {
 
     private Order processOrder(AdaptorRequest adaptorRequest){
         Order order = adaptorRequest.getOrder();
+        order.setState(adaptorRequest.getOrderStatus());
         Merchant merchant = adaptorRequest.getMerchant();
         order.setPayment(paymentDetailsService.getPaymentDetails(order, merchant));
         order.setQuote(quotationService.getQuotationForOrder(order, merchant));

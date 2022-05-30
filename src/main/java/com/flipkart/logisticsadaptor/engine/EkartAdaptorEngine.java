@@ -5,6 +5,7 @@ import com.flipkart.logisticsadaptor.api.PaymentDetailsService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
+import com.flipkart.logisticsadaptor.models.ekart.ResponsePayload;
 import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
@@ -15,6 +16,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 
 @Singleton
@@ -73,6 +76,11 @@ public class EkartAdaptorEngine {
 
     public AdaptorRequest processOrder(AdaptorRequest adaptorRequest) throws Exception{
         CreateShipmentResponse createShipmentResponse  = confirmBaseClient.execute(adaptorRequest);
+        for(ResponsePayload responsePayload: createShipmentResponse.getResponse()){
+            adaptorRequest.setTrackingId(responsePayload.getTrackingId());
+            adaptorRequest.setOrderStatus(responsePayload.getStatus());
+            adaptorRequest.getOrder().setState(responsePayload.getStatus());
+        }
         adaptorRequest.setCreateShipmentResponse(createShipmentResponse);
         return adaptorRequest;
     }

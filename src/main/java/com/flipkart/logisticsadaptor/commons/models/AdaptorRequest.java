@@ -31,12 +31,15 @@ public class AdaptorRequest {
 
     private String trackingId;
 
+    private String orderStatus;
+
 
     public AdaptorRequest(ConfirmRequest confirmRequest){
         requestType = RequestType.CONFIRM;
         context = confirmRequest.getContext();
         order = confirmRequest.getMessage().getOrder();
     }
+
 
 
 
