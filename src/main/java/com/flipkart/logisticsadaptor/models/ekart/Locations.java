@@ -3,17 +3,12 @@ package com.flipkart.logisticsadaptor.models.ekart;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.flipkart.logisticsadaptor.models.ondc.common.Address;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.Valid;
 
-/**
- * Created by vaibhav.janardhan on 27/09/16.
- */
+
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor

@@ -9,6 +9,7 @@ import com.flipkart.logisticsadaptor.models.ekart.enums.FulfilmentType;
 import com.flipkart.logisticsadaptor.models.ekart.enums.LogisticsType;
 import com.flipkart.logisticsadaptor.models.ekart.enums.PaymentChannel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

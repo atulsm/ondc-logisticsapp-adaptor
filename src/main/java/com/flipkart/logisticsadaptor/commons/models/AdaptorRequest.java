@@ -29,6 +29,8 @@ public class AdaptorRequest {
 
     private CreateShipmentResponse createShipmentResponse;
 
+    private String trackingId;
+
 
     public AdaptorRequest(ConfirmRequest confirmRequest){
         requestType = RequestType.CONFIRM;

@@ -2,7 +2,11 @@ package com.flipkart.logisticsadaptor.transformers.utils;
 
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
-import com.flipkart.logisticsadaptor.models.ondc.common.Descriptor;
+import com.flipkart.logisticsadaptor.models.ekart.Address;
+import com.flipkart.logisticsadaptor.models.ekart.Locations;
+import com.flipkart.logisticsadaptor.models.ekart.ShipmentDimension;
+import com.flipkart.logisticsadaptor.models.ekart.Weight;
+import com.flipkart.logisticsadaptor.models.ondc.common.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -61,5 +65,50 @@ public class EkartUtils {
         }
         return inp;
     }
+
+    public static Address getStartAddress(Order order){
+        Start start = order.getFulfillment().getStart();
+        return getAddress(start.getContact(), start.getLocation(), start.getPerson());
+    }
+
+    public static Address getEndAddress(Order order){
+        End end = order.getFulfillment().getEnd();
+        return getAddress(end.getContact(),  end.getLocation(), end.getPerson());
+    }
+
+    public static Address getAddress(Contact contact, Location location, Person person){
+        com.flipkart.logisticsadaptor.models.ondc.common.Address address = location.getAddress();
+        return Address.builder()
+                .emailId(contact.getEmail())
+                .primaryContactNumber(contact.getPhone())
+                .firstName(person.getName())
+                .addressLine1(String.join(address.getDoor(),  ", " ,  address.getName()))
+                .addressLine2(String.join(address.getBuilding(), ", ", address.getLocality(), " ,", address.getStreet()))
+                .pincode(address.getAreaCode())
+                .city(address.getCity())
+                .state(address.getState())
+                .build();
+    }
+
+    public static Integer getAmountInRupees(Order order){
+        return Math.round(order.getQuote().getPrice().getValue());
+    }
+
+    public static Locations getLocationForAddress(Address address){
+        return Locations.builder()
+                .address(address)
+                .build();
+    }
+
+    public static ShipmentDimension getShipmentDimensions(Order order){
+        return ShipmentDimension.builder()
+                .weight(new Weight(12))
+                .build();
+
+    }
+
+
+
+
 
 }
