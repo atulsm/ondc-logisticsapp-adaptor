@@ -1,6 +1,6 @@
 package com.flipkart.logisticsadaptor.api;
 
-import com.flipkart.logisticsadaptor.commons.models.Geocode;
+import com.flipkart.logisticsadaptor.commons.models.internal.Geocode;
 import com.flipkart.logisticsadaptor.models.csv.PincodeCsvModel;
 import com.flipkart.logisticsadaptor.utils.CSVUtils;
 

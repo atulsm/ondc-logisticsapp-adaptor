@@ -4,7 +4,7 @@ import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
-import com.flipkart.logisticsadaptor.models.Geocode;
+import com.flipkart.logisticsadaptor.commons.models.internal.Geocode;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.Fulfillment;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
