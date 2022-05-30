@@ -1,7 +1,7 @@
 package com.flipkart.logisticsadaptor.api;
 
-import com.flipkart.logisticsadaptor.models.ekart.Merchant;
-import com.flipkart.logisticsadaptor.models.ekart.RateCard;
+import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
+import com.flipkart.logisticsadaptor.models.ekart.internal.RateCard;
 import com.flipkart.logisticsadaptor.models.ondc.common.Order;
 import com.flipkart.logisticsadaptor.models.ondc.common.Price;
 import com.flipkart.logisticsadaptor.models.ondc.common.Quotation;

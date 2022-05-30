@@ -1,13 +1,12 @@
 package com.flipkart.logisticsadaptor.transformers.request_transformer;
 
-import com.flipkart.logisticsadaptor.api.LocalReverseGeocodeService;
 import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.models.Geocode;
-import com.flipkart.logisticsadaptor.models.ekart.Merchant;
+import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
 import com.flipkart.logisticsadaptor.models.ekart.SLARequest;
 import com.flipkart.logisticsadaptor.models.ondc.common.Fulfillment;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;

@@ -1,9 +1,6 @@
 package com.flipkart.logisticsadaptor.db;
 
-import com.atul.configservice.api.TestBucketService;
-import com.flipkart.logisticsadaptor.models.ekart.Merchant;
-import com.flipkart.logisticsadaptor.models.ekart.RateCard;
-import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
+import com.flipkart.logisticsadaptor.models.ekart.internal.RateCard;
 import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
