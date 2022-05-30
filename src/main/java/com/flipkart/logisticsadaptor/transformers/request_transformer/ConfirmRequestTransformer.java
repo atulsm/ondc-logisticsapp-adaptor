@@ -4,10 +4,43 @@ import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.commons.models.ClientRequest;
 import com.flipkart.logisticsadaptor.commons.models.RequestTransformer;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentRequest;
+import com.flipkart.logisticsadaptor.models.ekart.Service;
+import com.flipkart.logisticsadaptor.models.ekart.ServiceDetail;
+import com.flipkart.logisticsadaptor.models.ondc.confirm.ConfirmRequest;
+import com.flipkart.logisticsadaptor.transformers.utils.EkartUtils;
+
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConfirmRequestTransformer implements RequestTransformer<AdaptorRequest , ClientRequest> {
+
+    private static final String CREATE_SHIPMENT_URL = "/v2/shipments/create";
     @Override
     public ClientRequest getClientRequest(AdaptorRequest request) {
-        return null;
+        return ClientRequest.builder()
+                .headers(EkartUtils.getHeadersForMerchant(request.getMerchant()))
+                .url(CREATE_SHIPMENT_URL)
+                .body(getBody(request))
+                .build();
+    }
+
+    private CreateShipmentRequest getBody(AdaptorRequest adaptorRequest){
+        return CreateShipmentRequest.builder()
+                .clientName(adaptorRequest.getMerchant().getMerchantCode())
+                .services(getServices(adaptorRequest))
+                .build();
+    }
+
+    public List<Service> getServices(AdaptorRequest adaptorRequest){
+
+        ServiceDetail serviceDetail = ServiceDetail.builder()
+                .build();
+
+        return Arrays.asList(
+                Service.builder()
+                        .serviceDetails(Arrays.asList(serviceDetail))
+                        .build()
+        );
     }
 }
