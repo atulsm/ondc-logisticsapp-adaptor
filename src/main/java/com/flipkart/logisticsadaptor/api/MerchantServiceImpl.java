@@ -1,7 +1,7 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.db.MerchantDao;
-import com.flipkart.logisticsadaptor.models.ekart.Merchant;
+import com.flipkart.logisticsadaptor.models.ekart.internal.Merchant;
 import com.google.inject.Inject;
 
 public class MerchantServiceImpl implements MerchantService{

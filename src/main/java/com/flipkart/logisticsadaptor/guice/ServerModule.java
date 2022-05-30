@@ -24,7 +24,7 @@ public class ServerModule implements Module {
     }
     @Override
     public void configure(Binder binder) {
-
+        binder.bind(OrderService.class).to(OrderServiceImpl.class);
 
 
     }

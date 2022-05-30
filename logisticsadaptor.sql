@@ -100,3 +100,22 @@ VALUES
     ('https://mock_bap.com/', 'JYN', 'TEST', '1'),
     ('test_id', 'test', 'TEST', '2')
     ;
+
+# ------------------------------------------------------------
+DROP TABLE IF EXISTS `order`;
+
+CREATE TABLE `order`
+(
+    order_id      VARCHAR(255) NOT NULL,
+    tracking_id   VARCHAR(255) NOT NULL,
+    merchant_code VARCHAR(255) NOT NULL,
+    created       datetime     NOT NULL,
+    CONSTRAINT pk_order PRIMARY KEY (order_id)
+);
+
+
+INSERT INTO `order` (`order_id`, `tracking_id` ,`merchant_code`, `created`)
+VALUES
+    ('12234567', 'TESC123456', 'TES', now()),
+    ('12234568', 'TESC123457', 'TES', now())
+;
