@@ -17,7 +17,7 @@ public class InitResponseTransformer implements ResponseTransformer<CheckService
     }
 
     private Order getOrderForContext(CheckServiceabilityResponse checkServiceabilityResponse){
-        if(checkServiceabilityResponse.getCOD()) {
+        if(checkServiceabilityResponse.getCOD()!=null) {
             return Order.builder()
                     .isCOD(true)
                     .build();

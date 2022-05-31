@@ -2,7 +2,6 @@ package com.flipkart.logisticsadaptor.engine;
 
 import com.flipkart.logisticsadaptor.api.*;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
-<<<<<<< HEAD
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ekart.ResponsePayload;
@@ -31,7 +30,9 @@ public class EkartAdaptorEngine {
     private MerchantService merchantService;
     @Inject
     private PaymentDetailsService paymentDetailsService;
+    @Inject
     private OrderService orderService;
+    @Inject
     private TrackingService trackingService;
 
     @Inject
@@ -76,8 +77,10 @@ public class EkartAdaptorEngine {
             temp.getOrder().setItems(initRequest.getMessage().getOrder().getItems());
             temp.getOrder().setBilling(initRequest.getMessage().getOrder().getBilling());
             temp.getOrder().setFulfillment(initRequest.getMessage().getOrder().getFulfillment());
-            temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder(),merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
-            temp.getOrder().setPayment(paymentDetailsService.getPaymentDetails(temp.getOrder(),merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
+            if(temp.getOrder().isCOD()) {
+                temp.getOrder().setQuote(quotationService.getQuotationForOrder(initRequest.getMessage().getOrder(), merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
+                temp.getOrder().setPayment(paymentDetailsService.getPaymentDetails(temp.getOrder(), merchantService.getMerchantDetails(initRequest.getContext().getBapId())));
+            }
             return temp;
         }
         catch (Exception e){
