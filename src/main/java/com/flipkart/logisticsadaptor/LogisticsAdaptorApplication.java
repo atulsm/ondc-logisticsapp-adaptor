@@ -1,12 +1,15 @@
 package com.flipkart.logisticsadaptor;
 
 import com.flipkart.logisticsadaptor.api.LogisticsAdaptorService;
+import com.flipkart.logisticsadaptor.commons.models.internal.Order;
 import com.flipkart.logisticsadaptor.core.Bucket;
 import com.flipkart.logisticsadaptor.db.BucketDao;
 import com.flipkart.logisticsadaptor.engine.EkartRegistryModule;
 import com.flipkart.logisticsadaptor.guice.ServerModule;
 import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
 import com.flipkart.logisticsadaptor.commons.models.internal.RateCard;
+import com.flipkart.logisticsadaptor.resources.LogisticConfirmResource;
+import com.flipkart.logisticsadaptor.resources.LogisticInitResource;
 import com.flipkart.logisticsadaptor.resources.LogisticSearchResource;
 import com.flipkart.logisticsadaptor.resources.LogisticsAdaptorResource;
 import io.dropwizard.Application;
@@ -22,7 +25,7 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
         new LogisticsAdaptorApplication().run(args);
     }
 
-    private final HibernateBundle<LogisticsAdaptorConfiguration> hibernate = new HibernateBundle<LogisticsAdaptorConfiguration>(Bucket.class, Merchant.class, RateCard.class) {
+    private final HibernateBundle<LogisticsAdaptorConfiguration> hibernate = new HibernateBundle<LogisticsAdaptorConfiguration>(Bucket.class, Merchant.class, RateCard.class, Order.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(LogisticsAdaptorConfiguration configuration) {
             return configuration.getDataSourceFactory();
@@ -54,6 +57,10 @@ public class LogisticsAdaptorApplication extends Application<LogisticsAdaptorCon
         LogisticsAdaptorService.INSTANCE.init(dao);
         environment.jersey().register(new LogisticsAdaptorResource());
         environment.jersey().register(LogisticSearchResource.class);
+        environment.jersey().register(LogisticConfirmResource.class);
+        environment.jersey().register(LogisticInitResource.class);
+
+
 
     }
 

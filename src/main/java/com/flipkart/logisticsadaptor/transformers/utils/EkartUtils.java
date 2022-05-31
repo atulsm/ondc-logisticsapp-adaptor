@@ -2,11 +2,16 @@ package com.flipkart.logisticsadaptor.transformers.utils;
 
 import com.flipkart.logisticsadaptor.engine.EkartConstants;
 import com.flipkart.logisticsadaptor.commons.models.internal.Merchant;
-import com.flipkart.logisticsadaptor.models.ondc.common.Descriptor;
+import com.flipkart.logisticsadaptor.models.ekart.*;
+import com.flipkart.logisticsadaptor.models.ekart.Address;
+import com.flipkart.logisticsadaptor.models.ondc.common.*;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EkartUtils {
@@ -61,5 +66,79 @@ public class EkartUtils {
         }
         return inp;
     }
+
+    public static Address getStartAddress(Order order){
+        Start start = order.getFulfillment().getStart();
+        return getAddress(start.getContact(), start.getLocation(), start.getPerson());
+    }
+
+    public static Address getEndAddress(Order order){
+        End end = order.getFulfillment().getEnd();
+        return getAddress(end.getContact(),  end.getLocation(), end.getPerson());
+    }
+
+    public static Address getAddress(Contact contact, Location location, Person person){
+        com.flipkart.logisticsadaptor.models.ondc.common.Address address = location.getAddress();
+        return Address.builder()
+                .emailId(contact.getEmail())
+                .primaryContactNumber(contact.getPhone())
+                .firstName(person.getName())
+                .addressLine1(join(address.getDoor(),  ", " ,  address.getName()))
+                .addressLine2(join(address.getBuilding(), ", ", address.getLocality(), " ,", address.getStreet()))
+                .pincode(address.getAreaCode())
+                .city(address.getCity())
+                .state(address.getState())
+                .build();
+    }
+
+    public static Integer getAmountInRupees(Order order){
+        return Math.round(order.getQuote().getPrice().getValue());
+    }
+
+    public static Locations getLocationForAddress(Address address){
+        return Locations.builder()
+                .address(address)
+                .build();
+    }
+
+    public static ShipmentDimension getShipmentDimensions(Order order){
+        return ShipmentDimension.builder()
+                .weight(new Weight(12))
+                .build();
+
+    }
+
+    public static List<ShipmentItems> getShipmentItems(Order order){
+        List<ShipmentItems> shipmentItems = new ArrayList<>();
+        String orderId = order.getId();
+        for(Item item: order.getItems()){
+            shipmentItems.add(getShipmentItem(item, orderId, orderId));
+        }
+        return shipmentItems;
+    }
+
+    public static ShipmentItems getShipmentItem(Item item, String orderId , String invoiceId){
+            ShipmentItems shipmentItems =  ShipmentItems.builder()
+                                            .productId(item.getId())
+                                            .quantity(item.getQuantity().getCount())
+                                            .build();
+            shipmentItems.setOrderId(orderId);
+            shipmentItems.setInvoiceId(invoiceId);
+            return shipmentItems;
+    }
+
+    public static String join(String... strings){
+        String res = "";
+        for(String s: strings){
+            if(s != null && s.length() > 1){
+                res = res + s + " ";
+            }
+        }
+        return res;
+    }
+
+
+
+
 
 }

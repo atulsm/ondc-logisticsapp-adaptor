@@ -6,17 +6,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.flipkart.logisticsadaptor.models.ekart.enums.PackingPolicy;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.flipkart.logisticsadaptor.models.ekart.enums.ServiceLegs;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by vaibhav.janardhan on 27/09/16.
- */
+
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,8 +25,8 @@ public class ServiceDetail {
 
     private String tier;
 
-    @NotNull(message = "Service leg is null")
-    private String serviceLeg;
+    @Builder.Default
+    private String serviceLeg = ServiceLegs.FORWARD.name();
     @NotNull(message = "Service data is null")
     @Valid
     private ServiceData serviceData;
@@ -37,6 +34,7 @@ public class ServiceDetail {
     @Valid
     private ShipmentDetails shipment;
 
+    @Builder.Default
     private PackingPolicy packingPolicy = PackingPolicy.DEFAULT;
 
     @JsonIgnore

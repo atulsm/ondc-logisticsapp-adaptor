@@ -25,37 +25,14 @@ public class ServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(OrderService.class).to(OrderServiceImpl.class);
+        binder.bind(PaymentDetailsService.class).to(StaticPaymentDetailsService.class);
+        binder.bind(MerchantService.class).to(MerchantServiceImpl.class);
+        binder.bind(ReverseGeocodeService.class).to(LocalReverseGeocodeService.class);
+        binder.bind(QuotationService.class).to(QuotationServiceImpl.class);
 
 
     }
 
-    @Provides
-    @Singleton
-    @Inject
-    public LogisticSearchOrchestrator provideLogisticSearchOrchestrator(EkartAdaptorEngine ekartAdaptorEngine , QuotationService quotationService , MerchantService merchantService){
-            return new LogisticSearchOrchestrator(ekartAdaptorEngine, merchantService, quotationService) ;
-    }
-
-    @Provides
-    @Singleton
-    @Inject
-    public LogisticInitOrchestrator provideLogisticInitOrchestrator(EkartAdaptorEngine ekartAdaptorEngine, QuotationService quotationService , MerchantService merchantService){
-        return new LogisticInitOrchestrator(ekartAdaptorEngine, merchantService, quotationService) ;
-    }
-
-    @Provides
-    @Singleton
-    @Inject
-    public EkartAdaptorEngine provideEkartAdaptorEngine( @Named("EKartSearchClient") BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,@Named("EKartInitClient")BaseClient<InitRequest, OnInitMessage> initRequestOnInitMessageBaseClient, QuotationService quotationService , MerchantService merchantService,PaymentDetailsService paymentDetailsService){
-       return new EkartAdaptorEngine(searchRequestResponseMessageBaseClient,initRequestOnInitMessageBaseClient, merchantService, quotationService,paymentDetailsService);
-    }
-
-
-    @Provides
-    @Singleton
-    public ReverseGeocodeService provideLocalReverseGeocodeService(){
-        return new LocalReverseGeocodeService() ;
-    }
 
     @Provides
     @Singleton
@@ -65,32 +42,6 @@ public class ServerModule implements Module {
     }
 
 
-    @Provides
-    @Singleton
-    public MerchantService provideMerchantService(MerchantDao merchantDao){
-        return new MerchantServiceImpl(merchantDao);
-    }
-
-    @Provides
-    @Singleton
-    public QuotationService provideQuotationService(){
-        return new QuotationServiceImpl();
-    }
-
-    @Inject
-    @Provides
-    @Singleton
-    public MerchantDao provideMerchantDao(SessionFactory sessionFactory){
-        return new MerchantDao(sessionFactory);
-    }
-
-    @Inject
-    @Provides
-    @Singleton
-    public RateCardDao provideRateCardDao(SessionFactory sessionFactory){
-        return new RateCardDao(sessionFactory);
-    }
-
     @Inject
     @Provides
     @Singleton
@@ -98,12 +49,6 @@ public class ServerModule implements Module {
         return hibernate.getSessionFactory();
     }
 
-
-    @Provides
-    @Singleton
-    public PaymentDetailsService providePaymentDetailsService(){
-        return new StaticPaymentDetailsService();
-    }
 
 
 

@@ -5,14 +5,19 @@ import com.flipkart.logisticsadaptor.api.ReverseGeocodeService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.commons.clients.BasicHttpClient;
 import com.flipkart.logisticsadaptor.commons.clients.CoreHttpClient;
+import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.commons.utils.CustomObjectMapper;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
+import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
+import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.flipkart.logisticsadaptor.transformers.request_transformer.ConfirmRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.InitRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.SearchRequestTransformer;
+import com.flipkart.logisticsadaptor.transformers.response_transformer.ConfirmResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.InitResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.SearchResponseTransformer;
 import com.google.inject.AbstractModule;
@@ -56,7 +61,7 @@ public class EkartRegistryModule extends AbstractModule {
 
     @Provides
     @Singleton
-   @Named("EKartInitClient")
+    @Named("EKartInitClient")
     @Inject
     BaseClient<InitRequest, OnInitMessage> provideEkartInitClient(@Named("EKartInitHttpClient")CoreHttpClient<CheckServiceabilityResponse> httpClient,
                                                                   ReverseGeocodeService reverseGeocodeService){
@@ -78,6 +83,34 @@ public class EkartRegistryModule extends AbstractModule {
                 HttpClientBuilder.create().build(),
                 CustomObjectMapper.getJavaType(CheckServiceabilityResponse.class),
                 EkartConstants.INIT
+        );
+    }
+
+    @Provides
+    @Singleton
+    @Named("EKartConfirmClient")
+    @Inject
+    BaseClient<AdaptorRequest, CreateShipmentResponse> provideEkartConfirmClient(@Named("EKartConfirmHttpClient") CoreHttpClient<CreateShipmentResponse> httpClient,
+                                                                           ConfirmRequestTransformer confirmRequestTransformer,
+                                                                           ConfirmResponseTransformer confirmResponseTransformer){
+        return new BasicHttpClient<>(
+                httpClient,
+               confirmRequestTransformer,
+               confirmResponseTransformer
+        );
+    }
+
+    @Provides
+    @Singleton
+    @Named("EKartConfirmHttpClient")
+    @Inject
+    CoreHttpClient<CreateShipmentResponse>  provideEkartConfirmHttpClient(EkartConfig ekartConfig){
+        return new CoreHttpClient<>(ekartConfig.getEKartHost(),
+                ekartConfig.getPort(),
+                CoreHttpClient.HTTP_METHOD.POST,
+                HttpClientBuilder.create().build(),
+                CustomObjectMapper.getJavaType(CreateShipmentResponse.class),
+                EkartConstants.CONFIRM
         );
     }
 

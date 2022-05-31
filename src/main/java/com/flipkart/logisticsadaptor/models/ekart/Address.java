@@ -4,11 +4,12 @@ package com.flipkart.logisticsadaptor.models.ekart;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
+@Builder
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

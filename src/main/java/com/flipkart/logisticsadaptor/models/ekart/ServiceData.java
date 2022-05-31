@@ -9,6 +9,7 @@ import com.flipkart.logisticsadaptor.models.ekart.enums.FulfilmentType;
 import com.flipkart.logisticsadaptor.models.ekart.enums.LogisticsType;
 import com.flipkart.logisticsadaptor.models.ekart.enums.PaymentChannel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,11 +46,13 @@ public class ServiceData {
 
     private String pickupVendorName;
 
+    @Builder.Default
     private String fulfillmentType= FulfilmentType.NON_FBF.getName();
 
+    @Builder.Default
     private String logisticsType= LogisticsType.E2E_EKL.getName();
 
-    private String amountToCollect;
+    private Integer amountToCollect;
 
     @Valid
     private List<ServiceType> serviceTypes;
@@ -57,10 +61,10 @@ public class ServiceData {
 
     private String customerPromiseDate;
 
-
+    @Builder.Default
     private String deliveryType = DeliveryType.SMALL.name();
 
-
+    @Builder.Default
     private String paymentChannel = PaymentChannel.COD.name();
 
     @NotNull(message = SOURCE_LOCATION_IS_NULL)
@@ -86,6 +90,7 @@ public class ServiceData {
     @JsonIgnore
     private String shipmentPaymentReferenceId;
 
+    @Builder.Default
     private String handoverType = "source";
 
     private String destinationMhCode;

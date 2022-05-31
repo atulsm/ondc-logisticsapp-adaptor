@@ -3,6 +3,10 @@ package com.flipkart.logisticsadaptor.engine;
 import com.flipkart.logisticsadaptor.api.MerchantService;
 import com.flipkart.logisticsadaptor.api.PaymentDetailsService;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
+import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
+import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
+import com.flipkart.logisticsadaptor.models.ekart.ResponsePayload;
+import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
@@ -13,14 +17,19 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 
 @Singleton
 @Slf4j
 public class EkartAdaptorEngine {
 
 
+    @Inject
     private QuotationService quotationService;
+    @Inject
     private MerchantService merchantService;
+    @Inject
     private PaymentDetailsService paymentDetailsService;
 
     @Inject
@@ -31,14 +40,10 @@ public class EkartAdaptorEngine {
     @Named("EKartInitClient")
     private BaseClient<InitRequest, OnInitMessage> initRequestResponseMessageBaseClient;
 
+    @Inject
+    @Named("EKartConfirmClient")
+    private BaseClient<AdaptorRequest, CreateShipmentResponse> confirmBaseClient;
 
-    public  EkartAdaptorEngine(BaseClient<SearchRequest, OnSearchMessage> searchRequestResponseMessageBaseClient,BaseClient<InitRequest, OnInitMessage > initRequestResponseMessageBaseClient,MerchantService merchantService,QuotationService quotationService,PaymentDetailsService paymentDetailsService){
-        this.searchRequestResponseMessageBaseClient = searchRequestResponseMessageBaseClient;
-        this.initRequestResponseMessageBaseClient = initRequestResponseMessageBaseClient;
-        this.quotationService=quotationService;
-        this.merchantService=merchantService;
-        this.paymentDetailsService=paymentDetailsService;
-    }
 
 
     public OnSearchMessage getSearchResponse(SearchRequest searchRequest){
@@ -67,6 +72,17 @@ public class EkartAdaptorEngine {
             log.error("Exception In getIitResponse : " + e.getMessage());
         }
         return null;
+    }
+
+    public AdaptorRequest processOrder(AdaptorRequest adaptorRequest) throws Exception{
+        CreateShipmentResponse createShipmentResponse  = confirmBaseClient.execute(adaptorRequest);
+        for(ResponsePayload responsePayload: createShipmentResponse.getResponse()){
+            adaptorRequest.setTrackingId(responsePayload.getTrackingId());
+            adaptorRequest.setOrderStatus(responsePayload.getStatus());
+            adaptorRequest.getOrder().setState(responsePayload.getStatus());
+        }
+        adaptorRequest.setCreateShipmentResponse(createShipmentResponse);
+        return adaptorRequest;
     }
 
 }

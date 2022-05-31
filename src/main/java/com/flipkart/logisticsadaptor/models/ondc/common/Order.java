@@ -39,7 +39,7 @@ public class Order
 
 
     @JsonIgnore
-    private boolean isCOD;
+    private boolean isCOD = true;
 
     private String createdAt;
     private String updatedAt;

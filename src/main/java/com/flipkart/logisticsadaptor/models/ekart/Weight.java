@@ -20,4 +20,8 @@ public class Weight {
     private Float value;
 
     private String unit = Unit.Weight.KG.name();
+
+    public Weight(float val){
+        value = val;
+    }
 }

@@ -5,15 +5,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.flipkart.logisticsadaptor.models.ekart.enums.GoodsCategory;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,8 +19,11 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
 public class CreateShipmentRequest {
+    @Builder.Default
     private String requestId = UUID.randomUUID().toString();
     private String clientName;
+
+    @Builder.Default
     private String goodsCategory = GoodsCategory.NON_ESSENTIAL.name();
     private List<Service> services;
 

@@ -12,28 +12,23 @@ import java.util.Date;
 @Setter
 @Builder
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private String orderId;
 
-    @Column(name = "tracking_id" , nullable = false)
+    @Column(nullable = false)
     private String trackingId;
 
-    @Column(name = "merchant_code" , nullable = false)
+    @Column(nullable = false)
     private String merchantCode;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created", nullable = false)
-    private Date created;
+    @Column(nullable = false)
+    private String orderStatus;
 
-    @PrePersist
-    protected void onCreate() {
-         created = new Date();
-    }
 
 }
