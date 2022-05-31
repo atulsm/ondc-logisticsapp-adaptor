@@ -25,12 +25,12 @@ public class ServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(OrderService.class).to(OrderServiceImpl.class);
+
         binder.bind(PaymentDetailsService.class).to(StaticPaymentDetailsService.class);
         binder.bind(MerchantService.class).to(MerchantServiceImpl.class);
         binder.bind(ReverseGeocodeService.class).to(LocalReverseGeocodeService.class);
         binder.bind(QuotationService.class).to(QuotationServiceImpl.class);
-
-
+        binder.bind(TrackingService.class).to(TrackingServiceImpl.class);
     }
 
 
