@@ -2,13 +2,13 @@ package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.commons.models.internal.Order;
-import com.flipkart.logisticsadaptor.db.OrderDetailsDao;
+import com.flipkart.logisticsadaptor.db.OrderDao;
 import com.google.inject.Inject;
 
 public class OrderServiceImpl implements OrderService {
 
     @Inject
-    private OrderDetailsDao orderDetailsDao;
+    private OrderDao orderDetailsDao;
 
     @Override
     public String getTrackingIdForOrder(String orderId) {
@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
                 .orderId(adaptorRequest.getOrder().getId())
                 .trackingId(adaptorRequest.getTrackingId())
                 .merchantCode(adaptorRequest.getMerchant().getMerchantCode())
-                .status(adaptorRequest.getOrderStatus())
+                .orderStatus(adaptorRequest.getOrderStatus())
                 .build();
         return orderDetailsDao.create(order);
 

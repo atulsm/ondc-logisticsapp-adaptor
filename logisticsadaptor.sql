@@ -103,19 +103,21 @@ VALUES
     ;
 
 # ------------------------------------------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE orders
 (
-    id            VARCHAR(255) NOT NULL,
-    tracking_id   VARCHAR(255) NOT NULL,
-    merchant_code VARCHAR(255) NOT NULL,
-    order_status  VARCHAR(255) NOT NULL,
-    created_at    datetime     NOT NULL,
-    CONSTRAINT pk_order PRIMARY KEY (id)
+    id           VARCHAR(255) NOT NULL,
+    trackingId   VARCHAR(255) NOT NULL,
+    merchantCode VARCHAR(255) NOT NULL,
+    orderStatus  VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_orders PRIMARY KEY (id)
 );
+ALTER TABLE `orders`
+    ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
-INSERT INTO `order` (`id`, `tracking_id` ,`merchant_code`, `created_at`, `order_status`)
+INSERT INTO `orders` (`id`, `trackingId` ,`merchantCode`, `orderStatus`)
 VALUES
-    ('12234567', 'TESC123456', 'TES', now(), 'READY'),
-    ('12234568', 'TESC123457', 'TES', now(), 'READY')
+    ('12234567', 'TESC123456', 'TES', 'READY'),
+    ('12234568', 'TESC123457', 'TES', 'READY')
 ;

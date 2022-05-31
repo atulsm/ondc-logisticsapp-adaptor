@@ -6,10 +6,10 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 
-public class OrderDetailsDao extends AbstractDAO<Order> {
+public class OrderDao extends AbstractDAO<Order> {
 
     @Inject
-    public OrderDetailsDao(SessionFactory sessionFactory) {
+    public OrderDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
