@@ -1,18 +1,16 @@
 package com.flipkart.logisticsadaptor.engine;
 
-import com.flipkart.logisticsadaptor.api.MerchantService;
-import com.flipkart.logisticsadaptor.api.PaymentDetailsService;
+import com.flipkart.logisticsadaptor.api.*;
 import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
+<<<<<<< HEAD
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ekart.ResponsePayload;
-import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.ontrack.OnTrackMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
-import com.flipkart.logisticsadaptor.api.QuotationService;
 import com.flipkart.logisticsadaptor.models.ondc.track.TrackRequest;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -33,6 +31,8 @@ public class EkartAdaptorEngine {
     private MerchantService merchantService;
     @Inject
     private PaymentDetailsService paymentDetailsService;
+    private OrderService orderService;
+    private TrackingService trackingService;
 
     @Inject
     @Named("EKartSearchClient")
@@ -47,7 +47,6 @@ public class EkartAdaptorEngine {
     private BaseClient<AdaptorRequest, CreateShipmentResponse> confirmBaseClient;
 
 
-
     public OnSearchMessage getSearchResponse(SearchRequest searchRequest){
         try {
             return searchRequestResponseMessageBaseClient.execute(searchRequest);
@@ -60,7 +59,9 @@ public class EkartAdaptorEngine {
 
     public OnTrackMessage getTrackResponse(TrackRequest trackRequest){
         try{
-
+            OnTrackMessage temp= OnTrackMessage.builder().build();
+            temp.setTracking(trackingService.getTrackingURL(orderService.getTrackingIdForOrder(trackRequest.getMessage().getOrderId())));
+            return temp;
         }
         catch (Exception e){
             log.error("Exception In getSearchResponse : " + e.getMessage());

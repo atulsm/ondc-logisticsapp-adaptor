@@ -4,8 +4,12 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.ontrack;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.flipkart.logisticsadaptor.models.ondc.common.Tracking;
+import lombok.Builder;
 
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OnTrackMessage
 {
     private Tracking tracking;

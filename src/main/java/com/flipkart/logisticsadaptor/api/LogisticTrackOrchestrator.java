@@ -1,7 +1,7 @@
 package com.flipkart.logisticsadaptor.api;
 
 import com.flipkart.logisticsadaptor.engine.EkartAdaptorEngine;
-import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
+import com.flipkart.logisticsadaptor.models.ondc.ontrack.OnTrackMessage;
 import com.flipkart.logisticsadaptor.models.ondc.ontrack.OnTrackRequest;
 import com.flipkart.logisticsadaptor.models.ondc.track.TrackRequest;
 
@@ -18,7 +18,7 @@ public class LogisticTrackOrchestrator {
         onTrackRequest.setMessage(getTrackMessage(trackRequest));
         return onTrackRequest;
     }
-    public OnInitMessage getTrackMessage(TrackRequest trackRequest){
+    public OnTrackMessage getTrackMessage(TrackRequest trackRequest){
         return ekartAdaptorEngine.getTrackResponse(trackRequest);
     }
 }
