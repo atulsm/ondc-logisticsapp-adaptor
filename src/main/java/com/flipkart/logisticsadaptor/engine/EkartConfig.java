@@ -9,6 +9,17 @@ import javax.inject.Singleton;
 @Setter
 @Singleton
 public class EkartConfig {
-    private String eKartHost;
+    private String ekartStageHost;
+    private String ekartProdHost;
     private int port;
+
+    public String getEKartHost(){
+        return ekartProdHost;
+    }
+
+    public String getEkartStageHost(){
+        return ekartStageHost;
+    }
+
+
 }

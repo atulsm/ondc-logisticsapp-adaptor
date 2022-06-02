@@ -19,7 +19,8 @@ database:
     hibernate.format_sql: false
     hibernate.hbm2ddl.auto: update
 ekart:
-  ekartHost: staging.ekartlogistics.com
+  ekartStageHost: staging.ekartlogistics.com
+  ekartProdHost:  api.ekartlogistics.com
   port: 443
 logging:
   level: INFO
