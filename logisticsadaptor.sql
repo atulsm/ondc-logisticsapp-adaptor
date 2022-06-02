@@ -52,11 +52,25 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+# Dump of table merchant
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `merchant`;
+DROP TABLE IF EXISTS `rateCard`;
+
+CREATE TABLE  merchant
+(
+    id           VARCHAR(255) NOT NULL,
+    merchantCode VARCHAR(255) NULL,
+    authHeader   VARCHAR(255) NULL,
+    rateCardId   VARCHAR(255) NULL,
+    CONSTRAINT pk_merchant PRIMARY KEY (id)
+);
+
+# ------------------------------------------------------------
 
 # Dump of table rateCard
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `rateCard`;
 
 CREATE TABLE  rateCard
 (
@@ -64,6 +78,9 @@ CREATE TABLE  rateCard
     basePrice DOUBLE       NULL,
     CONSTRAINT pk_ratecard PRIMARY KEY (id)
     );
+
+ALTER TABLE merchant
+    ADD CONSTRAINT FK_MERCHANT_ON_RATECARDID FOREIGN KEY (rateCardId) REFERENCES rateCard (id);
 
 
 INSERT INTO `rateCard` (`id`, `basePrice`)
@@ -73,36 +90,16 @@ VALUES
     ('3', 25.00),
     ('4', 26.00)
     ;
-
-/*!40000 ALTER TABLE `bucket` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table merchant
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `merchant`;
-
-CREATE TABLE  merchant
-(
-    id           VARCHAR(255) NOT NULL,
-    merchantCode VARCHAR(255) NULL,
-    authHeader   VARCHAR(255) NULL,
-    rateCardId   VARCHAR(255) NULL,
-    CONSTRAINT pk_merchant PRIMARY KEY (id)
-    );
-
-ALTER TABLE merchant
-    ADD CONSTRAINT FK_MERCHANT_ON_RATECARDID FOREIGN KEY (rateCardId) REFERENCES rateCard (id);
-
 
 INSERT INTO `merchant` (`id`, `merchantCode` ,`authHeader`, `rateCardId`)
 VALUES
     ('https://mock_bap.com/', 'JYN', 'TEST', '1'),
     ('test_id', 'test', 'TEST', '2')
-    ;
+;
 
-# ------------------------------------------------------------
+
+
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE orders
 (
