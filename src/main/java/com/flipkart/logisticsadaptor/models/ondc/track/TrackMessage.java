@@ -4,6 +4,10 @@
 
 package com.flipkart.logisticsadaptor.models.ondc.track;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
 public class TrackMessage
 {
     private String orderId;
