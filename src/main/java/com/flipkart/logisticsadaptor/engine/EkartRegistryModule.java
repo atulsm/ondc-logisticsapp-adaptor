@@ -105,7 +105,7 @@ public class EkartRegistryModule extends AbstractModule {
     @Named("EKartConfirmHttpClient")
     @Inject
     CoreHttpClient<CreateShipmentResponse>  provideEkartConfirmHttpClient(EkartConfig ekartConfig){
-        return new CoreHttpClient<>(ekartConfig.getEKartHost(),
+        return new CoreHttpClient<>(ekartConfig.getEkartStageHost(),
                 ekartConfig.getPort(),
                 CoreHttpClient.HTTP_METHOD.POST,
                 HttpClientBuilder.create().build(),
