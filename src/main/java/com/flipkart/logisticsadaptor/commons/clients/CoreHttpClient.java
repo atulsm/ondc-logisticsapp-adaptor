@@ -17,6 +17,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
@@ -99,6 +100,8 @@ public class CoreHttpClient<T> {
             case POST:
                 httpUriRequest = createPostRequest(request);
                 break;
+            case PUT:
+                httpUriRequest= createPutRequest(request);
             default:
                 break;
         }
@@ -118,6 +121,20 @@ public class CoreHttpClient<T> {
                 UTF8
             ));
         return httpPost;
+    }
+
+    private HttpPut createPutRequest(ClientRequest request) throws Exception {
+        HttpPut httpPut=new HttpPut();
+        httpPut.setURI(getRequestUri(request));
+        for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
+            httpPut.addHeader(entry.getKey(), entry.getValue());
+        }
+        httpPut.setEntity(new StringEntity(
+                CustomObjectMapper.getObjectAsString(request.getBody()),
+                "application/json",
+                UTF8
+        ));
+        return httpPut;
     }
 
 

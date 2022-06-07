@@ -6,6 +6,7 @@ public class EkartConstants {
     public static final String INIT = "INIT";
 
     public static final String CONFIRM = "CONFIRM";
+    public static final String CANCEL = "CANCEL";
 
     public static final String EKART_PROVIDER_ID = "flipkart.test";
     public static final String EKART_PROVIDER_NAME = "FK Ekart";
