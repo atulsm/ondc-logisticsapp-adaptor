@@ -5,7 +5,9 @@ import com.flipkart.logisticsadaptor.commons.clients.BaseClient;
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ekart.ResponsePayload;
+import com.flipkart.logisticsadaptor.models.ondc.cancel.CancelRequest;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oncancel.OnCancelMessage;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.ontrack.OnTrackMessage;
@@ -34,6 +36,8 @@ public class EkartAdaptorEngine {
     private OrderService orderService;
     @Inject
     private TrackingService trackingService;
+    @Inject
+    private OrderDetails orderDetails;
 
     @Inject
     @Named("EKartSearchClient")
@@ -47,6 +51,11 @@ public class EkartAdaptorEngine {
     @Named("EKartConfirmClient")
     private BaseClient<AdaptorRequest, CreateShipmentResponse> confirmBaseClient;
 
+    @Inject
+    @Named("EKartCancelClient")
+    private BaseClient<CancelRequest, OnCancelMessage> cancelRequestResponseMessageBaseClient;
+
+
 
     public OnSearchMessage getSearchResponse(SearchRequest searchRequest){
         try {
@@ -56,6 +65,23 @@ public class EkartAdaptorEngine {
             log.error("Exception In getSearchResponse : " + e.getMessage());
         }
        return null;
+    }
+    public OnCancelMessage getCancelResponse(CancelRequest cancelRequest){
+        try{
+            if(cancelRequest.getMessage().getTrackingId()!=null) {
+                OnCancelMessage obj = cancelRequestResponseMessageBaseClient.execute(cancelRequest);
+                obj.setOrder(orderDetails.getOrderFromOrderId(cancelRequest.getMessage().getOrderId()));
+                return obj;
+            }
+            else{
+
+            }
+
+        }
+        catch (Exception e){
+            log.error("Exception In getCancelResponse : " + e.getMessage());
+        }
+        return null;
     }
 
     public OnTrackMessage getTrackResponse(TrackRequest trackRequest){

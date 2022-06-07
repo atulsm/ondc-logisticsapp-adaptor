@@ -11,13 +11,6 @@ public class LogisticInitOrchestrator {
     @Inject
     private EkartAdaptorEngine ekartAdaptorEngine ;
 
-    @Inject
-    private QuotationService quotationService;
-
-    @Inject
-    private MerchantService merchantService;
-
-
 
     public OnInitRequest orchestrate(InitRequest initRequest){
         OnInitRequest onInitRequest = new OnInitRequest();

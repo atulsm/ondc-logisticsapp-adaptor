@@ -7,16 +7,20 @@ import com.flipkart.logisticsadaptor.commons.clients.BasicHttpClient;
 import com.flipkart.logisticsadaptor.commons.clients.CoreHttpClient;
 import com.flipkart.logisticsadaptor.commons.models.AdaptorRequest;
 import com.flipkart.logisticsadaptor.commons.utils.CustomObjectMapper;
+import com.flipkart.logisticsadaptor.models.ekart.CancelShipmentResponse;
 import com.flipkart.logisticsadaptor.models.ekart.CheckServiceabilityResponse;
 import com.flipkart.logisticsadaptor.models.ekart.CreateShipmentResponse;
-import com.flipkart.logisticsadaptor.models.ondc.confirm.OnConfirmMessage;
+import com.flipkart.logisticsadaptor.models.ondc.cancel.CancelRequest;
 import com.flipkart.logisticsadaptor.models.ondc.init.InitRequest;
+import com.flipkart.logisticsadaptor.models.ondc.oncancel.OnCancelMessage;
 import com.flipkart.logisticsadaptor.models.ondc.oninit.OnInitMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.OnSearchMessage;
 import com.flipkart.logisticsadaptor.models.ondc.search.SearchRequest;
+import com.flipkart.logisticsadaptor.transformers.request_transformer.CancelRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.ConfirmRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.InitRequestTransformer;
 import com.flipkart.logisticsadaptor.transformers.request_transformer.SearchRequestTransformer;
+import com.flipkart.logisticsadaptor.transformers.response_transformer.CancelResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.ConfirmResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.InitResponseTransformer;
 import com.flipkart.logisticsadaptor.transformers.response_transformer.SearchResponseTransformer;
@@ -111,6 +115,32 @@ public class EkartRegistryModule extends AbstractModule {
                 HttpClientBuilder.create().build(),
                 CustomObjectMapper.getJavaType(CreateShipmentResponse.class),
                 EkartConstants.CONFIRM
+        );
+    }
+    @Provides
+    @Singleton
+    @Named("EKartCancelClient")
+    @Inject
+    BaseClient<CancelRequest, OnCancelMessage> provideEkartCancelClient(@Named("EKartCancelHttpClient") CoreHttpClient<CancelShipmentResponse> httpClient
+                                                                       ){
+        return new BasicHttpClient<>(
+                httpClient,
+               new CancelRequestTransformer(),
+                new CancelResponseTransformer()
+        );
+    }
+
+    @Provides
+    @Singleton
+    @Named("EKartCancelHttpClient")
+    @Inject
+    CoreHttpClient<CancelShipmentResponse>  provideEkartCancelHttpClient(EkartConfig ekartConfig){
+        return new CoreHttpClient<>(ekartConfig.getEkartStageHost(),
+                ekartConfig.getPort(),
+                CoreHttpClient.HTTP_METHOD.PUT,
+                HttpClientBuilder.create().build(),
+                CustomObjectMapper.getJavaType(CancelShipmentResponse.class),
+                EkartConstants.CANCEL
         );
     }
 
