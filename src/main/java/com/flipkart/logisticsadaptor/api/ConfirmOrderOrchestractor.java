@@ -43,6 +43,7 @@ public class ConfirmOrderOrchestractor {
         }
         catch (Exception e){
             log.error("Confirm Request" , confirmRequest, e.getMessage());
+            throw new RuntimeException("Bad Request ");
         }
         return request;
     }

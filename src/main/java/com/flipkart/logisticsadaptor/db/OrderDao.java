@@ -23,6 +23,9 @@ public class OrderDao extends AbstractDAO<Order> {
     }
 
     public Order create(Order order){
+        if(find(order.getOrderId()) != null){
+            throw new RuntimeException("OrderId Already Exists");
+        }
         return  persist(order);
     }
 
