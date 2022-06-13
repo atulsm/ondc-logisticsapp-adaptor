@@ -5,12 +5,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.flipkart.logisticsapp</groupId>
-    <artifactId>ondc-logisctis-adaptor</artifactId>
+    <groupId>logisticsapp-use-fkinternal</groupId>
+    <artifactId>ondc-logisctis-adaptor-use-fkinternal</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ondc-logisctis-adaptor</name>
+    <name>DEPRECATED REPO. Use FKInternal instead</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
